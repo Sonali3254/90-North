@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            z-index: 1000;
+        }
+        
+        .container {
+            display: flex;
+            margin-top: 80px; 
+        }
+        
+        .left-menu {
+            width: 200px;
+            background-color: #2c3e50;
+            padding: 1rem;
+            transition: width 0.3s, background-color 0.3s;
+            overflow: hidden;
+        }
+        
+        .left-menu.collapsed {
+            width: 50px;
+        }
+        
+        .left-menu:hover {
+            background-color: #34495e;
+        }
+        
+        .left-menu .collapse-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        .left-menu ul {
+            list-style: none;
+            padding-left: 0;
+            transition: opacity 0.3s;
+        }
+		#section3{
+			padding-bottom: 100px;
+		}
+        
+        .left-menu ul li {
+            margin: 10px 0;
+        }
+        
+        .left-menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        
+        .left-menu ul li a:hover {
+            color: #1abc9c;
+        }
+        
+        .left-menu ul li a .icon {
+            margin-right: 10px;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 1rem;
+        }
+        
+        .right-panel {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 1rem;
+        }
+        
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left-menu, .right-panel {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1>My Webpage</h1>
+    </header>
+    <div class="container">
+        <nav class="left-menu">
+            <button class="collapse-btn">☰</button>
+            <ul>
+                <li><a href="#section1"><span class="icon">🏠</span>Section 1</a></li>
+                <li><a href="#section2"><span class="icon">📄</span>Section 2</a></li>
+                <li><a href="#section3"><span class="icon">📞</span>Section 3</a></li>
+            </ul>
+        </nav>
+        <main class="content">
+            <section id="section1">
+                <h2>Section 1</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vestibulum, odio non hendrerit malesuada, justo lectus bibendum turpis, eu lacinia ipsum risus nec nulla. Donec venenatis, libero sit amet dictum tincidunt, sem risus vestibulum lectus, nec elementum urna tortor ut eros. Mauris a orci ac nisi aliquet condimentum. Integer sed tincidunt lacus. Praesent condimentum nunc eu orci facilisis, vel ultricies arcu fermentum.</p>
+                <p>Aliquam erat volutpat. Suspendisse in accumsan neque. Proin aliquet dictum turpis at feugiat. Suspendisse potenti. Sed malesuada ex ac nisl venenatis, nec convallis nulla fermentum. Integer fringilla tempor varius. Phasellus sit amet leo euismod, faucibus urna et, malesuada sem. Curabitur sit amet magna nisi. Nulla facilisi.</p>
+            </section>
+            <section id="section2">
+                <h2>Section 2</h2>
+                <p>Phasellus ac ex nulla. In bibendum, nisi id venenatis sodales, neque sapien faucibus sapien, eu tempor justo lorem at lacus. Suspendisse blandit nisi eu magna mollis, non fringilla nulla lobortis. Vivamus in urna tincidunt, egestas augue at, volutpat ligula. In eget libero id leo feugiat cursus vel eget odio. Maecenas auctor augue eget arcu posuere, non tempus sapien sagittis.</p>
+                <p>Nullam ac mauris venenatis, dictum tortor at, tempus metus. Sed consequat elementum mi nec scelerisque. Cras consequat fringilla eros id commodo. Aliquam erat volutpat. Donec ut risus enim. Integer mollis magna sed arcu aliquam, sed maximus eros viverra. Vestibulum venenatis tellus et nulla auctor, sit amet blandit ipsum tempus. Aliquam erat volutpat. In quis metus nec leo venenatis aliquam.</p>
+            </section>
+            <section id="section3">
+                <h2>Section 3</h2>
+                <p>Curabitur vitae ligula aliquet, sagittis elit a, cursus eros. In lobortis ligula vitae nulla pharetra, sit amet gravida neque aliquam. Fusce dignissim venenatis nisl, vel dictum felis. Sed et libero luctus, elementum lorem ut, tempor nisi. Nulla facilisi. Donec egestas sapien non orci lacinia, a pharetra orci auctor. Morbi ultricies nisi nec orci fringilla dignissim. Integer vehicula felis at enim gravida, at laoreet erat condimentum.</p>
+                <p>Praesent gravida ultrices tellus, ac efficitur enim fringilla non. Nam dapibus vulputate fermentum. Duis vel leo ex. Suspendisse potenti. Aenean vestibulum, erat in vestibulum vehicula, risus odio vestibulum lectus, nec elementum urna tortor ut eros. Mauris a orci ac nisi aliquet condimentum. Integer sed tincidunt lacus. Praesent condimentum nunc eu orci facilisis, vel ultricies arcu fermentum.</p>
+				<button class="screen-size">Test JavaScript</button>
+            </section>
+			
+        </main>
+        <aside class="right-panel">
+            <h2>Right Panel</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fringilla, est non scelerisque feugiat, mauris ligula elementum urna, ut fermentum sapien mauris ac ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur imperdiet hendrerit massa, vitae fringilla purus suscipit at. Aliquam erat volutpat. Vivamus vehicula, felis a feugiat condimentum, risus arcu fringilla ex, at consequat nunc magna non leo.</p>
+        </aside>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2025 My Webpage</p>
+    </footer>
+    <script>
+       document.querySelector('.collapse-btn').addEventListener('click', function() {
+            const leftMenu = document.querySelector('.left-menu');
+            leftMenu.classList.toggle('collapsed');
+        });
+
+        function adjustPageWidth() {
+            const screenWidth = window.innerWidth;
+            const body = document.body;
+
+            if (screenWidth >= 992 && screenWidth <= 1600) {
+                body.style.transform = 'scale(0.9)';
+                body.style.transformOrigin = '0 0';
+                body.style.width = '100%';
+            } else if (screenWidth >= 700 && screenWidth <= 767) {
+                body.style.transform = 'scale(0.8)';
+                body.style.transformOrigin = '0 0';
+                body.style.width = '100%';
+            } else if (screenWidth >= 600 && screenWidth < 700) {
+                body.style.transform = 'scale(0.75)';
+                body.style.transformOrigin = '0 0';
+                body.style.width = '100%';
+            } else if (screenWidth <= 600) {
+                body.style.transform = 'scale(0.5)';
+                body.style.transformOrigin = '0 0';
+                body.style.width = '100%';
+            } else {
+                body.style.transform = 'scale(1)';
+                body.style.width = '100%';
+            }
+        }
+       
+		document.querySelector('.screen-size').addEventListener('click', function() {
+            adjustPageWidth();
+        });
+        
+        // Add an event listener to adjust the page width when the window is resized
+        window.addEventListener('resize', adjustPageWidth);
+		
+    </script>
+</body>
+</html>
