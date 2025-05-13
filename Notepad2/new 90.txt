@@ -1,0 +1,19 @@
+Header Fields
+
+Total One-Time Cost
+Total One-Time Margin
+Total Monthly Cost
+Total Monthly Margin
+Annual Cost
+Annual Margin
+Total Contract Cost
+Total Contract Margin
+
+LIG Fields
+
+Margin
+Cost Amount
+Margin Amount
+Margin %
+Contract Cost
+Contract Margin

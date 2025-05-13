@@ -1,0 +1,24 @@
+
+SSD- 	Structure steel design
+PIS - Project information system - 
+	QIF- Quotation information form -  is PIS and QIF are same -  can just show us, quick overview of page
+PES - estimation system - based on requirement - input data - please show us the PES in system
+
+then it comes to sales, after approval
+JAF - Job approval form - approval questions  -
+
+CIF - Customer informaiton form
+
+
+is there any approval before sending to sutomer
+
+lets say after customer approved , is there any other approval after customer approval before entering in CIF.
+
+output of PES
+
+sales team is not using any custome form
+
+we want to see one end toend transaction in PES can you please show us
+
+PES and CIF
+

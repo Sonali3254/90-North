@@ -1,0 +1,20 @@
+Confirmation Date	 
+Employee Name	- Paresh Kumar Nayak 
+Employee Region	- India 
+Employee Shift	- General KSA time
+Assignment Type	-
+Project Type
+Project Name	- ZAMIL 
+Project ID	 
+Start Date on Project	- 50 % from 4th Nov 23 to 7th Dec 23 ,100 % from 9th Dec 23 
+End Date on Project	 
+Project Manager Name - Ayman Ismail	 
+Allocation %	 - 100 %
+Practice COE Email ID	 
+Solution Architect Email ID	 
+PRGM Manager Email ID	 -
+Location / Shore	- Offshore 
+Onsite Location (if applicable)	 
+HR SPOC Name	 
+RM SPOC Name	 
+RMG Comments

@@ -1,0 +1,12 @@
+area = non editable, auto update, allow only 2 dicimal point
+
+CSS change in Geometry arrayset.
+DOc designer - model name wise table
+
+.cpq-table-column-header-cell.oj-table-column-header-cell.col-mezzanineNo {
+    background-color: aqua;
+}
+
+.cpq-table-column-header-cell.oj-table-column-header-cell.col-geometry_MezanineArr,.cpq-table-column-header-cell.oj-table-column-header-cell.col-loads_mezzanineArr,.cpq-table-column-header-cell.oj-table-column-header-cell.col-flooring_mazzanineArr,.cpq-table-column-header-cell.oj-table-column-header-cell.col-handrail_mzArr{
+	background-color: aqua;
+}

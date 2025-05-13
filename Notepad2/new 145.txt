@@ -1,0 +1,24 @@
+DB - CDIAuthParams
+
+CXAPIPwd - Cdi@12345
+
+
+Fusion Integration 
+https://fa-ewwk-test-saasfaprod1.fa.ocs.oraclecloud.com/
+sivasankarganesh.chandrasekaran@mastek.com
+
+We have identified the fusion integration credentials are not working anymore that are currently present under integration center
+
+What we did :
+	Step -1 :- Took the Endpoint URL for CRM Fusion from integration center
+	Step -2 : Used the Password shown in the screenshot and it seems to be working.
+	
+	
+Correct credential :
+
+URL - https://fa-ewwk-test-saasfaprod1.fa.ocs.oraclecloud.com/
+sivasankarganesh.chandrasekaran@mastek.com
+Password - CDI@12345
+
+
+	9043974283 - Indusind Bank

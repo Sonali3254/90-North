@@ -1,0 +1,2 @@
+need to send advance % instead of static description - need to change in payload(createAdvancedInvoice_02.xml)
+

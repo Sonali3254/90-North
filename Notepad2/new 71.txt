@@ -1,0 +1,10 @@
+quote name, Quote ID, amount, ARR attach - information needed in SFDC
+
+oppty will created in SF, opty details sent to CPQ, in CPQ they create different Quote , the Quote will selected as primary in CPQ then the information will send back to SF Opty.
+
+Customer Id specific to customer
+
+Salesforce will be the master for account
+site will be same name as account
+
+Line is not there so send the line information through header

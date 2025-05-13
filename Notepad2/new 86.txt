@@ -1,0 +1,2 @@
+1.All the Prepared for attributes will be R/O except admin in all the steps.
+2. All the Bill to/ Shipto attributes will be R/O in all the steps except in progress(here R/W for all the profiles)

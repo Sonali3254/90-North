@@ -1,0 +1,32 @@
+END Wall Profile table - Right information should copy from Left and vice versa
+Let and Right END wall should
+
+Remarks needs the capability of the character limit of the field - 
+
+Primary memebr tab - when Primary paint system is "SPECIAL" - enable one more aray set name - "Coat" - same for the Secondary tab aswell.
+
+add one boolean -  to copy the left end wall to right and vice versa with another booean
+
+Secondary memebr tab - when Primary paint system is "SPECIAL" - enable one more aray set name - "Coat" - same for the Secondary tab aswell.
+
+Wall Panel Accessories
+
+Crane System - Auto generated - Crane System-1
+
+All the CSS color fileds need to be read only - make forcset  or add in rec rule
+
+
+If Panel by = OTHERS, Hide Single skin and sandwitch botton.
+If Color Name = RAL - Then open a new filed "Ral code".
+Description - write a rec rule to show the combination of all the fields, refer PIS for exact cobination
+Add a new HTML field "Color" to show the color depending on the value of color name
+
+Hide Color Name - ZA for all the paint value except UNP
+
+Date - 12th/sep/24
+
+Need to separate the end wall profile array set for left and right information
+
+In Manufacturing fields and one more option "Others", Based o this a new text field "Manufacturer Name" should come.
+
+Need to check How to update and deploy data table through API.

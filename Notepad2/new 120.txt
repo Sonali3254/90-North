@@ -1,0 +1,9 @@
+PEB an SSD tab should only be visible when the status is under estimation
+
+Opty Details - Create a new Tab  - should be visble for PEB only
+Sales Team Comment(Read/Write) - Internal Quoted, Inprogress
+Estimation Team Comment(Read/Write) - Under Estimation
+
+When Status - Project Created - Hide Generate Version
+
+

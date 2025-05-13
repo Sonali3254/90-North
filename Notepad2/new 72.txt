@@ -1,0 +1,20 @@
+Header
+
+https://elcainformatiquetest.bigmachines.com/rest/v16/commerceDocumentsOraclecpqoTransaction/actions/_new_transaction
+
+
+Save /AddLine Items >> Add the line items to the transaction
+https://elcainformatiquetest.bigmachines.com//rest/v16/commerceDocumentsOraclecpqoTransaction/37273935/actions/addLineItem_t
+
+{
+    "documents": {
+        "_currency_pref": {
+            "currencyCode": "CHF"
+        },
+        "_customer_id": "99999"
+    }
+}
+
+
+https://elcainformatiquetest.bigmachines.com/rest/v16/commerceDocumentsOraclecpqoTransaction/37410367/actions/cleanSave_t
+

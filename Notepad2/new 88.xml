@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Header>
+    <bm:userInfo xmlns:bm="urn:soap.bigmachines.com">
+      <bm:sessionId>ddd0da8830db4c61a9d6c0506409a6934f06962a746faf97cfa4</bm:sessionId>
+    </bm:userInfo>
+    <bm:category xmlns:bm="urn:soap.bigmachines.com">Commerce</bm:category>
+    <bm:xsdInfo xmlns:bm="urn:soap.bigmachines.com">
+      <bm:schemaLocation>https://zamilindustrialtest1.bigmachines.com/bmfsweb/zamilindustrialtest1/schema/v1_0/commerce/oraclecpqo.xsd</bm:schemaLocation>
+    </bm:xsdInfo>
+  </soapenv:Header>
+  <soapenv:Body>
+    <bm:importFileAttachments xmlns:bm="urn:soap.bigmachines.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <bm:mode>update</bm:mode>
+      <bm:attachments>
+        <bm:attachment>
+          <bm:document_number/>
+          <bm:variable_name/>
+          <bm:filename/>
+          <bm:file_content/>
+        </bm:attachment>
+      </bm:attachments>
+      <bm:transaction>
+        <bm:process_var_name>oraclecpqo</bm:process_var_name>
+        <bm:id/>
+      </bm:transaction>
+    </bm:importFileAttachments>
+  </soapenv:Body>
+</soapenv:Envelope>

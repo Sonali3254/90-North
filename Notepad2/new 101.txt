@@ -1,0 +1,14 @@
+.cpq-table-column-header-cell.oj-table-column-header-cell.col-craneSystemHtml{
+    background-color:aqua;
+}
+
+.cpq-table-column-header-cell.oj-table-column-header-cell.col-runwayHtml{
+	background-color:aqua;
+}
+
+.cpq-table-column-header-cell.oj-table-column-header-cell.col-geometry_MezanineArr,.cpq-table-column-header-cell.oj-table-column-header-cell.col-loads_mezzanineArr,.cpq-table-column-header-cell.oj-table-column-header-cell.col-flooring_mazzanineArr,.cpq-table-column-header-cell.oj-table-column-header-cell.col-handrail_mzArr,.cpq-table-column-header-cell.oj-table-column-header-cell.col-geometry_MezanineArr:hover,.cpq-table-column-header-cell.oj-table-column-header-cell.col-loads_mezzanineArr:hover,.cpq-table-column-header-cell.oj-table-column-header-cell.col-flooring_mazzanineArr:hover,.cpq-table-column-header-cell.oj-table-column-header-cell.col-handrail_mzArr:hover{
+	background-color: aqua;
+}
+.cpq-table-column-header-cell.oj-table-column-header-cell.col-craneSystemHtml,.cpq-table-column-header-cell.oj-table-column-header-cell.col-runwayHtml,.cpq-table-column-header-cell.oj-table-column-header-cell.col-liftInfoHtml{
+	background-color:aqua;
+}

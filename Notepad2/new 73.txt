@@ -1,0 +1,1033 @@
+<xsl:variable name="main_doc" select="/transaction/data_xml/document[@document_var_name='transaction']/"/>
+<xsl:variable name="externalDoc" select="document(concat('https://',$main_doc/systemCompanyName_t,'.bigmachines.com/bmfsweb/', $main_doc/systemCompanyName_t,'/image/CFDEmail/ProdTableLabelNamesServices.xml'))"/>
+<xsl:variable name="brazilTaxExempt" select="$main_doc/brazilTaxExempt_t"/>
+<xsl:variable name="servicePriceCondition">
+	<xsl:if test="($main_doc/printQuantity_t='true' and ( not ($main_doc/printSurcharges_t='true') and  not ($main_doc/printDiscounts_t='true') and  not ($main_doc/sOQ1Discount_t='true'))) or (($main_doc/printDiscounts_t='true' or $main_doc/printSurcharges_t='true') and $main_doc/printQuantity_t='true')">true</xsl:if>
+</xsl:variable>
+<xsl:variable name="ServiceAdjustmentCondition">
+	<xsl:if test="($main_doc/printDiscounts_t='true' or $main_doc/printSurcharges_t='true') and $main_doc/printQuantity_t='true'">true</xsl:if>
+</xsl:variable>
+<xsl:variable name="serviceNetPriceCondition">
+	<xsl:if test="(($main_doc/printDiscounts_t='true' or $main_doc/printSurcharges_t='true') and $main_doc/printQuantity_t='true') or ($main_doc/printQuantity_t='true' and ( not ($main_doc/printSurcharges_t='true') and  not ($main_doc/printDiscounts_t='true') and $main_doc/sOQ1Discount_t='true'))">true</xsl:if>
+</xsl:variable>
+<xsl:variable name="QtyCondition">
+	<xsl:if test="$main_doc/printQuantity_t='true'">true</xsl:if>
+</xsl:variable>
+<xsl:variable name="TotalPriceCondition">
+	<xsl:if test="($main_doc/printSurcharges_t='true' and  not ($main_doc/printQuantity_t='true')) or ($main_doc/printDiscounts_t='true' and  not ($main_doc/printQuantity_t='true'))">true</xsl:if>
+</xsl:variable>
+<xsl:variable name="TotalAdjustmentCondition">
+	<xsl:if test="($main_doc/printSurcharges_t='true' and  not ($main_doc/printQuantity_t='true')) or ($main_doc/printDiscounts_t='true' and  not ($main_doc/printQuantity_t='true'))">true</xsl:if>
+</xsl:variable>
+<xsl:variable name="columnSpan" as="xs:integer">
+	<xsl:value-of select="(number($servicePriceCondition='true')+number($ServiceAdjustmentCondition='true')+ number($serviceNetPriceCondition='true')+ number($TotalAdjustmentCondition='true')+number($TotalPriceCondition='true')+ number($QtyCondition='true')+2)"/>
+</xsl:variable>
+<xsl:variable name="comments" select="$externalDoc/ProdTableLabelNamesServices/Comments/*[name() = $tagName]"/>
+<xsl:variable name="notes" select="$externalDoc/ProdTableLabelNamesServices/Notes/*[name() = $tagName]"/>
+<xsl:variable name="itemNetTotal" select="$externalDoc/ProdTableLabelNamesServices/ItemNetTotal/*[name() = $tagName]"/>
+<xsl:variable name="serviceItemNetTotal" select="$externalDoc/ProdTableLabelNamesServices/ServiceItemNetTotal/*[name() = $tagName]"/>
+<xsl:variable name="subtotal" select="$externalDoc/ProdTableLabelNamesServices/Subtotal/*[name() = $tagName]"/>
+<!-- autoFit="true" -->
+<!-- <fo:table width="100%" autoFit="true" border="1px solid #000000"> -->
+<fo:table width="100%" autoFit="true" border="1px solid #000000" border-after-width.conditionality="retain" margin-top="1mm">
+	<fo:table-column column-width="8%" column-number="1"/>
+	<fo:table-column column-width="38.0%" column-number="2"/>
+	<xsl:if test="$servicePriceCondition='true'">
+		<fo:table-column column-width="12.0%"/>
+	</xsl:if>
+	<xsl:if test="$ServiceAdjustmentCondition='true'">
+		<fo:table-column column-width="12.5%"/>
+	</xsl:if>
+	<xsl:if test="$serviceNetPriceCondition='true'">
+		<fo:table-column column-width="12.0%"/>
+	</xsl:if>
+	<xsl:if test="$QtyCondition='true'">
+		<fo:table-column column-width="10.0%"/>
+	</xsl:if>
+	<xsl:if test="$TotalPriceCondition='true'">
+		<fo:table-column column-width="12.0%"/>
+	</xsl:if>
+	<xsl:if test="$TotalAdjustmentCondition='true'">
+		<fo:table-column column-width="14.0%"/>
+	</xsl:if>
+	<fo:table-column column-width="13.0%"/>
+	<fo:table-header>
+		<fo:table-row keep-together.within-page="1" border-bottom="1px solid #000000">
+			<fo:table-cell border-top="1px solid #000000" padding-top="1mm" border-left="1px solid #000000" padding-left="2mm" padding-right="2.5mm">
+				<xsl:variable name="item" select="$externalDoc/ProdTableLabelNamesServices/Item/*[name() = $tagName]"/>
+				<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="preserve">
+					<xsl:value-of select="$item"/>
+				</fo:block>
+			</fo:table-cell>
+			<!-- <fo:table-cell cpq-cell="1" border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="2.5mm"> -->
+			<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-right="0.5mm">
+				<xsl:variable name="product" select="$externalDoc/ProdTableLabelNamesServices/ProductNumberSerialNumber/*[name() = $tagName]"/>
+				<xsl:variable name="servcdesc" select="$externalDoc/ProdTableLabelNamesServices/ServiceDescription/*[name() = $tagName]"/>
+				<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="preserve">
+					<xsl:value-of select="$product"/>
+				</fo:block>
+				<!-- <xsl:value-of select="'&#10;'"/> -->
+				<fo:block/>
+				<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed,Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="preserve">
+					<xsl:value-of select="$servcdesc"/>
+				</fo:block>
+			</fo:table-cell>
+			<xsl:if test="$servicePriceCondition='true' and ($main_doc/languageAttr_t = 'en' or $main_doc/languageAttr_t = 'en_GB' or $main_doc/languageAttr_t = 'fr' or $main_doc/languageAttr_t = 'fr_CA' or $main_doc/languageAttr_t = 'fi_FI' or $main_doc/languageAttr_t='de' or $main_doc/languageAttr_t='it' or $main_doc/languageAttr_t='pt_BR')">
+				<!-- Existing <fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="3.6mm"> -->
+				<!-- Below combination is for English,Englosh(GB), Korea , PortuHuese, Simplefied Chinse,French, French(CA),German,Italian,Simplified Chinese , Traditional Chinese -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="1mm">
+					<fo:block>
+						<xsl:variable name="servcprice" select="$externalDoc/ProdTableLabelNamesServices/ServicePrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$servicePriceCondition='true' and ($main_doc/languageAttr_t='es')">
+				<!-- Existing <fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="3.6mm"> -->
+				<!-- Below combination is for Russia -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2.5mm" padding-right="1mm">
+					<fo:block>
+						<xsl:variable name="servcprice" select="$externalDoc/ProdTableLabelNamesServices/ServicePrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$servicePriceCondition='true' and ($main_doc/languageAttr_t='nl_NL' or $main_doc/languageAttr_t='ru'  or  $main_doc/languageAttr_t = 'es_MX' or $main_doc/languageAttr_t = 'sv_SE')">
+				<!-- Existing <fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="3.6mm"> -->
+				<!-- Making the Condition for the Dutch,Russia, Spanish, Spanish LAR, Swedish -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="1mm" padding-right="1mm">
+					<fo:block>
+						<xsl:variable name="servcprice" select="$externalDoc/ProdTableLabelNamesServices/ServicePrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<!-- Below combination is for  Korea  -->
+			<xsl:if test="$servicePriceCondition='true' and ($main_doc/languageAttr_t='ko_KR')">
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="4mm">
+					<fo:block>
+						<xsl:variable name="servcprice" select="$externalDoc/ProdTableLabelNamesServices/ServicePrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$servicePriceCondition='true' and $main_doc/languageAttr_t='zh_TW'">
+				<!-- Below combination is for Traditional Chinese -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="5mm">
+					<fo:block>
+						<xsl:variable name="servcprice" select="$externalDoc/ProdTableLabelNamesServices/ServicePrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$servicePriceCondition='true' and $main_doc/languageAttr_t='zh_CN' ">
+				<!-- Below combination is for Simplified Chinese -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="7.5mm">
+				<!-- <fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="3.5mm"
+				padding-right="0.1mm"> -->
+					<fo:block>
+						<xsl:variable name="servcprice" select="$externalDoc/ProdTableLabelNamesServices/ServicePrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="center" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$ServiceAdjustmentCondition='true' and $main_doc/languageAttr_t='de'">
+				<!-- Existing values 
+				<fo:table-cell border ="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="0.5mm"> -->
+				<!-- New Comobination for the German thing being introduced -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="1.5mm" padding-right="0.5mm">
+					<fo:block>
+						<xsl:variable name="servcadjmnt" select="$externalDoc/ProdTableLabelNamesServices/ServiceAdjustment/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcadjmnt"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$ServiceAdjustmentCondition='true' and ($main_doc/languageAttr_t!='de' or $main_doc/languageAttr_t='ru' or $main_doc/languageAttr_t='es')">
+				<!-- Existing values -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="0.5mm">
+					<!-- New Comobination for the German thing being introduced 
+				<fo:table-cell border ="1px solid #000000" padding-top="1mm" padding-left="1.5mm" padding-right="0.5mm">-->
+					<fo:block>
+						<xsl:variable name="servcadjmnt" select="$externalDoc/ProdTableLabelNamesServices/ServiceAdjustment/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcadjmnt"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$serviceNetPriceCondition='true' and ($main_doc/languageAttr_t = 'en' or $main_doc/languageAttr_t = 'en_GB' or $main_doc/languageAttr_t = 'fr' or $main_doc/languageAttr_t = 'fr_CA' or $main_doc/languageAttr_t = 'fi_FI' or $main_doc/languageAttr_t='de' or $main_doc/languageAttr_t='it' or $main_doc/languageAttr_t='pt_BR' or $main_doc/languageAttr_t='es' or $main_doc/languageAttr_t='nl_NL' or $main_doc/languageAttr_t='ru'  or  $main_doc/languageAttr_t = 'es_MX' or $main_doc/languageAttr_t = 'sv_SE' or $main_doc/languageAttr_t='ko_KR')">
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="1.2mm">
+					<fo:block>
+						<xsl:variable name="servcnetprice" select="$externalDoc/ProdTableLabelNamesServices/ServiceNetPrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcnetprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$serviceNetPriceCondition='true' and $main_doc/languageAttr_t ='zh_CN'">
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="4mm">
+					<fo:block>
+						<xsl:variable name="servcnetprice" select="$externalDoc/ProdTableLabelNamesServices/ServiceNetPrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="center" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcnetprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$serviceNetPriceCondition='true' and $main_doc/languageAttr_t='zh_TW'">
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="0.1mm">
+					<fo:block>
+						<xsl:variable name="servcnetprice" select="$externalDoc/ProdTableLabelNamesServices/ServiceNetPrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="center" linefeed-treatment="preserve">
+							<xsl:value-of select="$servcnetprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$QtyCondition='true' and ($main_doc/languageAttr_t='en' or $main_doc/languageAttr_t = 'en_GB'  or $main_doc/languageAttr_t = 'nl_NL')">
+				<!-- Existing Line <fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="0.5mm"> -->
+				<!-- below combination is for English,Englosh(GB), Korea ,Dutch   -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="0.5mm">
+					<fo:block>
+						<xsl:variable name="qty" select="$externalDoc/ProdTableLabelNamesServices/Quantity/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="center" linefeed-treatment="preserve">
+							<xsl:value-of select="$qty"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$QtyCondition='true' and ($main_doc/languageAttr_t = 'it' or $main_doc/languageAttr_t = 'pt_BR')">
+				<!-- Below Combination PortuHuese, Italian -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="7.6mm" padding-right="0.05mm">
+					<fo:block>
+						<xsl:variable name="qty" select="$externalDoc/ProdTableLabelNamesServices/Quantity/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="center" linefeed-treatment="preserve">
+							<xsl:value-of select="$qty"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$QtyCondition='true' and $main_doc/languageAttr_t = 'zh_TW'">
+				<!-- Below Combination Simplefied Chinse , Traditional Chinese -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="5mm" padding-right="0.05mm">
+					<fo:block>
+						<xsl:variable name="qty" select="$externalDoc/ProdTableLabelNamesServices/Quantity/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="center" linefeed-treatment="preserve">
+							<xsl:value-of select="$qty"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$QtyCondition='true' and $main_doc/languageAttr_t = 'zh_CN'">
+				<!-- Below Combination Simplefied Chinse , Traditional Chinese -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="5mm" padding-right="0.05mm">
+					<fo:block>
+						<xsl:variable name="qty" select="$externalDoc/ProdTableLabelNamesServices/Quantity/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="center" linefeed-treatment="preserve">
+							<xsl:value-of select="$qty"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$QtyCondition='true' and ($main_doc/languageAttr_t='fr' or $main_doc/languageAttr_t = 'fr_CA' or  $main_doc/languageAttr_t = 'es_MX' or $main_doc/languageAttr_t = 'sv_SE' or $main_doc/languageAttr_t = 'fi_FI' or $main_doc/languageAttr_t = 'de' or  $main_doc/languageAttr_t = 'ko_KR' or  $main_doc/languageAttr_t = 'ru' or  $main_doc/languageAttr_t = 'es')">
+				<!-- Existing Line <fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="0.5mm"> -->
+				<!-- Below combination trying for French,French(CA),German, Russian , Spanish, Spanish LAR, Swedish -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="5.5mm" padding-right="0.5mm">
+					<fo:block>
+						<xsl:variable name="qty" select="$externalDoc/ProdTableLabelNamesServices/Quantity/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="center" linefeed-treatment="preserve">
+							<xsl:value-of select="$qty"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$TotalPriceCondition='true'">
+				<!-- Esxisting Combination <fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="5mm"> -->
+				<!-- Worked for almost all the cases <fo:table-cell border ="1px solid #000000" border-left="1px solid #000000" border-right="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="6mm"> -->
+				<!-- writing for Simplified Chinese, Traditional Chinese -->
+				<!-- <fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="1.5mm" padding-right="5mm"> -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="1.5mm" padding-right="6mm">
+					<fo:block>
+						<xsl:variable name="totprice" select="$externalDoc/ProdTableLabelNamesServices/TotalPrice/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$totprice"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<xsl:if test="$TotalAdjustmentCondition='true'">
+				<!-- Existing Combination<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="3mm"> -->
+				<!-- <fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="4mm"> -->
+				<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="7mm">
+					<fo:block>
+						<xsl:variable name="totadjmnt" select="$externalDoc/ProdTableLabelNamesServices/TotalAdjustment/*[name() = $tagName]"/>
+						<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="end" linefeed-treatment="preserve">
+							<xsl:value-of select="$totadjmnt"/>
+						</fo:block>
+					</fo:block>
+				</fo:table-cell>
+			</xsl:if>
+			<!-- <fo:table-cell  border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="1.5mm">
+		number-columns-spanned="8"			-->
+			<fo:table-cell border-top="1px solid #000000" border-bottom="1px solid #000000" padding-top="1mm" padding-left="2mm" padding-right="2mm">
+				<!-- number-columns-spanned="4"  -->
+				<fo:block>
+					<xsl:variable name="extprice" select="$externalDoc/ProdTableLabelNamesServices/ExtendedPrice/*[name() = $tagName]"/>
+					<fo:block line-height="1.15" font-weight="{$cfdFontWeight}" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="right" linefeed-treatment="preserve">
+						<xsl:value-of select="$extprice"/>
+						<!-- <xsl:value-of select="number($servicePriceCondition='true')+number($ServiceAdjustmentCondition='true')"/> -->
+					</fo:block>
+					<xsl:if test="$main_doc/languageAttr_t!='ja_JP'">
+						<fo:block linefeed-treatment="preserve" line-height="9pt" text-align="right" font-weight="bold" color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+							<xsl:choose>
+								<xsl:when test="$main_doc/currency_t/@display_value">
+									<xsl:value-of select="$main_doc/currency_t/@display_value"/>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:apply-templates select="$main_doc/currency_t"/>
+								</xsl:otherwise>
+							</xsl:choose> 
+						</fo:block>
+					</xsl:if>
+				</fo:block>
+			</fo:table-cell>
+		</fo:table-row>
+	</fo:table-header>
+	<fo:table-body>
+		<xsl:for-each select="/transaction/data_xml/document[normalize-space(./@data_type)='2' or normalize-space(./@data_type)='3']  ">
+			<!-- <xsl:sort select="./cFDSequenceNumber_l" Commented to solve numbering issue-->
+			<xsl:sort select="./displayCFDSequenceNumber_l" data-type="number" order="ascending"/>
+			<xsl:variable name="_dsSub1" select="."/>
+			<xsl:variable name="modelDocNumber" select="$_dsSub1/displayCFDSequenceNumber_l"/>
+			<xsl:choose>
+				<xsl:when test="$_dsSub1/displayAssetSerialNo_l = 'true' ">
+					<fo:table-row keep-together.within-page="1">
+						<fo:table-cell padding-top="0.01mm" border-left="1px solid #000000" padding-left="2mm" padding-bottom="0.005mm">
+							<xsl:if test="$_dsSub1/_parent_doc_number=''">
+								<fo:block space-after="0.040in" space-after.precedence="force"/>
+							</xsl:if>
+							<fo:block>
+								<fo:inline line-height="1.15" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="treat-as-space">
+									<xsl:value-of select="$_dsSub1/displayCFDSequenceNumber_l"/>
+								</fo:inline>
+							</fo:block>
+						</fo:table-cell>
+						<!-- Start of displaying Part description, prices etc -->
+						<fo:table-cell number-columns-spanned="{$columnSpan}">
+							<fo:table autoFit="true" width="100%">
+								<!--  table-layout="fixed" <fo:table-column column-width="proportional-column-width(1)"/> -->
+								<fo:table-column column-width="38.0%"/>
+								<xsl:if test="$servicePriceCondition='true'">
+									<fo:table-column column-width="12.0%"/>
+								</xsl:if>
+								<xsl:if test="$ServiceAdjustmentCondition='true'">
+									<fo:table-column column-width="12.5%"/>
+								</xsl:if>
+								<xsl:if test="$serviceNetPriceCondition='true'">
+									<fo:table-column column-width="12.0%"/>
+								</xsl:if>
+								<xsl:if test="$QtyCondition='true'">
+									<fo:table-column column-width="10.0%"/>
+								</xsl:if>
+								<xsl:if test="$TotalPriceCondition='true'">
+									<fo:table-column column-width="12.0%"/>
+								</xsl:if>
+								<xsl:if test="$TotalAdjustmentCondition='true'">
+									<fo:table-column column-width="14.0%"/>
+								</xsl:if>
+								<fo:table-column column-width="13.0%"/>
+								<fo:table-body>
+									<xsl:for-each select="/transaction/data_xml/document[(normalize-space(./@data_type)='2' or normalize-space(./@data_type)='3') ] ">
+										<xsl:sort select="./cFDSequenceNumber_l" data-type="number" order="ascending"/>
+										<xsl:variable name="_dsSub1" select="."/>
+										<!-- Displaying Subtotal line when there is Extended Warranty and when it is the last line the group -->
+										<xsl:if test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and $_dsSub1/lastLineInAssetGroup_l = 'true' and  $_dsSub1/displayLine_l='true'and  $_dsSub1/isExtendedWarranty_l='true' and $main_doc/subTotalEWAX_t='true' and displayAssetSerialNo_l='false'">
+											<fo:table-row>
+												<fo:table-cell number-columns-spanned="8">
+													<fo:table>
+														<fo:table-column column-width="84.0%"/>
+														<fo:table-column column-width="16.0%"/>
+														<fo:table-body>
+															<fo:table-row>
+																<fo:table-cell>
+																	<fo:block linefeed-treatment="preserve" line-height="9pt" text-align="right">
+																		<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																			<fo:inline text-align="right">
+																				<xsl:value-of select="$subtotal"/> :</fo:inline>
+																		</fo:inline>
+																	</fo:block>
+																</fo:table-cell>
+																<fo:table-cell padding-top="1mm" padding-bottom="0.005mm" padding-right="2mm">
+																	<fo:block linefeed-treatment="preserve" line-height="9pt" text-align="right">
+																		<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																			<fo:inline text-align="right">
+																				<xsl:value-of select=" $_dsSub1/subtotalWithoutEWARCFD_l"/>
+																			</fo:inline>
+																		</fo:inline>
+																	</fo:block>
+																</fo:table-cell>
+															</fo:table-row>
+														</fo:table-body>
+													</fo:table>
+												</fo:table-cell>
+											</fo:table-row>
+										</xsl:if>
+										<!-- Display Asset Serviced/Asset Serial Number for each group -->
+										<xsl:if test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and $_dsSub1/displayLine_l='true'  ">
+											<fo:table-row>
+												<fo:table-cell number-columns-spanned="8" padding-top="1mm" padding-bottom="0.005mm" padding-left="0.1mm">
+													<xsl:choose>
+														<xsl:when test="./displayAssetSerialNo_l='true'">
+															<fo:block>
+																<xsl:variable name="externalDoc" select="document(concat('https://',$main_doc/systemCompanyName_t,'.bigmachines.com/bmfsweb/', $main_doc/systemCompanyName_t,'/image/CFDEmail/ProdTableLabelNamesServices.xml'))"/>
+																<xsl:variable name="assetNo" select="./assetServiced_l"/>
+																<xsl:variable name="assetSerialNo" select="./serialNumber_l"/>
+																<!-- <xsl:variable name="assetdescp" select="./productDescription_l"/> -->
+																<xsl:variable name="assetdescp" select="./assetProductDescriptionCFD_l"/>
+																<fo:block>
+																	<xsl:if test="$main_doc/languageAttr_t ='ja_JP'">
+																		<fo:inline line-height="1.15" font-weight="bold" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="treat-as-space">
+																			<xsl:if test="$assetNo != ''">
+																				<xsl:value-of select="concat($assetNo,' /') "/>
+																				<xsl:value-of select="' '"/>
+																			</xsl:if>
+																			<xsl:value-of select="$assetSerialNo"/>
+																			<xsl:value-of select="' '"/>
+																		</fo:inline>
+																		<fo:inline line-height="1.15" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="treat-as-space">
+																			<xsl:value-of select="$assetdescp"/>
+																		</fo:inline>
+																	</xsl:if>
+																	<xsl:if test="$main_doc/languageAttr_t !='ja_JP'">
+																		<fo:inline line-height="1.15" font-weight="bold" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="treat-as-space">
+																			<xsl:if test="$assetNo != ''">
+																			<!-- LEBEIS-5553 starts -->
+																				<xsl:if test="./manufacturerModelNumber_l != ./productCode_l">
+																					<xsl:if test="./manufacturerModelNumber_l != ''">
+																						<xsl:value-of select="concat(./manufacturerModelNumber_l,' /')"/>
+																						<!-- <xsl:value-of select="concat($assetNo,' /') "/> -->
+																					</xsl:if>	
+																					<xsl:value-of select="' '"/>
+																				</xsl:if >
+																				<xsl:if test="./manufacturerModelNumber_l = ./productCode_l or ./manufacturerModelNumber_l = '' or ./productCode_l = ''" >
+																					<xsl:value-of select="concat($assetNo,' /') "/>
+																					<xsl:value-of select="' '"/>
+																				</xsl:if>
+																			<!-- LEBEIS-5553 ends -->	
+																			</xsl:if>
+																			<xsl:value-of select="$assetSerialNo"/>
+																			<xsl:value-of select="' '"/>
+																		</fo:inline>
+																		<fo:inline line-height="1.15" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="treat-as-space">
+																			<xsl:value-of select="$assetdescp"/>
+																		</fo:inline>
+																	</xsl:if>
+																</fo:block>
+															</fo:block>
+														</xsl:when>
+													</xsl:choose>
+													<!-- LEBEIS-5553 starts-->
+													<xsl:choose>
+														<!-- <xsl:when test="./displayAssetSerialNo_l!='true'"> -->
+														<xsl:when test="./assetProductOption_l!=''">
+															<fo:block>
+																<xsl:variable name="externalDoc" select="document(concat('https://',$main_doc/systemCompanyName_t,'.bigmachines.com/bmfsweb/', $main_doc/systemCompanyName_t,'/image/CFDEmail/ProdTableLabelNamesServices.xml'))"/>
+																<xsl:variable name="assetOption" select="./assetProductOption_l"/>
+																<xsl:variable name="assetOptionDesc" select="./assetProductOptionDescription_l"/>
+																<fo:block>
+																			<xsl:if test="$assetOption != ''">
+																				<fo:inline line-height="1.15" font-weight="bold" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="treat-as-space">
+																					<xsl:value-of select="$assetOption"/>
+																					<xsl:value-of select="' '"/>
+																				</fo:inline>
+																				<fo:inline line-height="1.15" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" linefeed-treatment="treat-as-space">
+																				<xsl:value-of select="$assetOptionDesc"/>
+																				</fo:inline>
+																			</xsl:if>
+																</fo:block>
+															</fo:block>
+														</xsl:when>
+													</xsl:choose>
+													<!-- LEBEIS-5553 ends-->
+													<xsl:choose>
+														<xsl:when test="$main_doc/languageAttr_t!='ja_JP' and ./displayAssetSerialNo_l='true' ">
+															<fo:block>
+																<xsl:variable name="customerAsstNum" select="$externalDoc/ProdTableLabelNamesServices/CustomerAssetNumber/*[name() = $tagName]"/>
+																<fo:block>
+																	<xsl:if test="./customerAssetNumber_l != ''">
+																		<fo:inline font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" font-weight="bold" text-align="start" white-space-collapse="true" linefeed-treatment="treat-as-space">
+																			<xsl:value-of select="concat($customerAsstNum,' : ')"/>
+																		</fo:inline>
+																		<fo:inline font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" white-space-collapse="true" linefeed-treatment="treat-as-space">
+																			<xsl:value-of select="./customerAssetNumber_l"/>
+																		</fo:inline>
+																	</xsl:if>
+																		<!-- Modified the below condition as per the LebeisQA-4188 -->
+																		<xsl:if test="./manufacturerModelNumber_l != ./productCode_l">
+																			<!-- commented as part of LEBEIS-5553 -->
+																			<!-- <xsl:if test="./manufacturerModelNumber_l != ''"> -->
+																				<!-- (<xsl:value-of select="./manufacturerModelNumber_l"/> -->
+																			<!-- </xsl:if>	 -->
+																			<!-- <xsl:value-of select="' '"/> -->
+																			<xsl:if test="./manufacturer_l != ''">
+																			<fo:inline font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start" white-space-collapse="true" linefeed-treatment="treat-as-space">
+																				(<xsl:value-of select="./manufacturer_l"/>)
+																			</fo:inline>
+																			</xsl:if>
+																		</xsl:if>
+																</fo:block>
+															</fo:block>
+														</xsl:when>
+													</xsl:choose>
+												</fo:table-cell>
+											</fo:table-row>
+											<fo:table-row>
+												<fo:table-cell>
+													<!-- <fo:table-cell number-columns-spanned="8" padding-top="1mm"  padding-bottom="0.005mm" padding-left="2mm"> -->
+													<!-- <fo:block-container> -->
+													<fo:block>
+														<xsl:choose>
+															<xsl:when test="  $_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and  $_dsSub1/displayLine_l='true'">
+																<fo:block>
+																	<fo:table border-collapse="collapse">
+																		<fo:table-column column-width="100%"/>
+																		<fo:table-body>
+																			<fo:table-row keep-together.within-page="1">
+																				<fo:table-cell padding-top="1mm" padding-left="0.1mm" padding-bottom="0.005mm" padding-right="2.5mm">
+																					<fo:block>
+																						<xsl:variable name="externalDoc" select="document(concat('https://',$main_doc/systemCompanyName_t,'.bigmachines.com/bmfsweb/', $main_doc/systemCompanyName_t,'/image/CFDEmail/ProdTableLabelNamesServices.xml'))"/>
+																						<xsl:variable name="labor" select="$externalDoc/ProdTableLabelNamesServices/LaborHour/*[name() = $tagName]"/>
+																						<fo:block font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="left" white-space-collapse="true" linefeed-treatment="treat-as-space">
+																							<!-- added as part of LEBEIS-2076	-->
+																							<!--	<xsl:if test="$_dsSub1/taxItemCategory_l =teo 'HW' and $_dsSub1/_parent_doc_number=''"> -->
+																							<xsl:if test="$_dsSub1/lineType_l= 'Part' and $_dsSub1/_parent_doc_number=''">
+																								<xsl:value-of select="$_dsSub1/part/_part_number"/>
+																								<xsl:value-of select="' '"/>
+																							</xsl:if>
+																							<xsl:variable name="partDesc">
+																								<xsl:choose>
+																									<xsl:when test="$_dsSub1/part/_part_desc/@display_value">
+																										<xsl:value-of select="$_dsSub1/part/_part_desc/@display_value"/>
+																									</xsl:when>
+																									<xsl:otherwise>
+																										<xsl:apply-templates select="$_dsSub1/part/_part_desc"/>
+																									</xsl:otherwise>
+																								</xsl:choose>
+																							</xsl:variable>
+																							<!-- For Labour part, Labour(hour) will be the standard description -->
+																							<xsl:if test="$_dsSub1/_parent_doc_number =''">
+																								<xsl:choose>
+																									<xsl:when test="$_dsSub1/lineType_l= 'Labor' and ($main_doc/cFDRegion_t != 'Region - America' and $main_doc/cFDRegion_t !='Japan')">
+																										<!-- Labor (hour) -->
+																										<xsl:value-of select="$labor"/>
+																									</xsl:when>
+																									<xsl:when test="$_dsSub1/lineType_l != 'Labor'">
+																										<xsl:value-of select="$_dsSub1/productDescCFD_l"/>
+																										<!--<xsl:value-of select="$_dsSub1/partDescriptionOverride_l"/>-->
+																									</xsl:when>
+																								</xsl:choose>
+																							</xsl:if>
+																							<xsl:if test="$_dsSub1/_parent_doc_number !=''">
+																								<fo:table>
+																									<fo:table-column column-width="10%"/>
+																									<fo:table-column column-width="90%"/>
+																									<!-- Updated column width Upgrade 22D -->
+																									<fo:table-body>
+																										<fo:table-cell/>
+																										<fo:table-cell>
+																											<fo:block text-align="start">
+																												<xsl:choose>
+																													<xsl:when test="$_dsSub1/lineType_l= 'Labor' and ($main_doc/cFDRegion_t != 'Region - America' and $main_doc/cFDRegion_t !='Japan')">
+																														<!-- Labor (hour) -->
+																														<xsl:value-of select="$labor"/>
+																													</xsl:when>
+																													<xsl:when test="$_dsSub1/lineType_l != 'Labor'">
+																														<xsl:value-of select="$_dsSub1/productDescCFD_l"/>
+																														<!--<xsl:value-of select="$_dsSub1/partDescriptionOverride_l"/>-->
+																													</xsl:when>
+																												</xsl:choose>
+																											</fo:block>
+																										</fo:table-cell>
+																									</fo:table-body>
+																								</fo:table>
+																							</xsl:if>
+																							<!-- </xsl:if> -->
+																						</fo:block>
+																					</fo:block>
+																				</fo:table-cell>
+																			</fo:table-row>
+																			<!-- <xsl:if test="$_dsSub1/cFDDiscountNames_l != '' and  ($main_doc/printDiscounts_t='true' or $main_doc/printSurcharges_t='true') "> -->
+																			<xsl:if test="$_dsSub1/cFDDiscountNames_l != '' or $_dsSub1/cFDSurchargeNames_l != ''">
+																				<fo:table-row keep-together.within-page="1">
+																					<fo:table-cell number-columns-spanned="2" padding="10px">
+																						<fo:table>
+																							<fo:table-column column-width="6%"/>
+																							<fo:table-column column-width="94%"/> <!-- Added column width-Upgrade22D -->
+																							<fo:table-column/>
+																							<fo:table-body>
+																								<fo:table-cell/>
+																								<fo:table-cell>
+																									<xsl:if test="$main_doc/printDiscounts_t='true'">
+																										<fo:block linefeed-treatment="preserve" line-height="11pt" text-align="left" color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																											<xsl:variable name="modifiers">
+																												<xsl:call-template name="replace-string">
+																													<xsl:with-param name="text" select="$_dsSub1/cFDDiscountNames_l"/>
+																													<xsl:with-param name="replace" select="'###'"/>
+																													<xsl:with-param name="with" select="'&#xa;'"/>
+																												</xsl:call-template>
+																											</xsl:variable>
+																											<xsl:value-of select="$modifiers"/>
+																										</fo:block>
+																									</xsl:if>
+																									<xsl:if test="$main_doc/printSurcharges_t='true'">
+																										<fo:block linefeed-treatment="preserve" line-height="11pt" text-align="left" color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																											<xsl:variable name="modifiers">
+																												<xsl:call-template name="replace-string">
+																													<xsl:with-param name="text" select="$_dsSub1/cFDSurchargeNames_l"/>
+																													<xsl:with-param name="replace" select="'###'"/>
+																													<xsl:with-param name="with" select="'&#xa;'"/>
+																												</xsl:call-template>
+																											</xsl:variable>
+																											<xsl:value-of select="$modifiers"/>
+																										</fo:block>
+																									</xsl:if>
+																								</fo:table-cell>
+																							</fo:table-body>
+																						</fo:table>
+																					</fo:table-cell>
+																				</fo:table-row>
+																			</xsl:if>
+																		</fo:table-body>
+																	</fo:table>
+																</fo:block>
+															</xsl:when>
+														</xsl:choose>
+														<!-- <fo:block space-after="0.4in" space-after.precedence="force"/> -->
+													</fo:block>
+												</fo:table-cell>
+												<xsl:choose>
+													<xsl:when test="$servicePriceCondition='true'">
+														<!-- <fo:table-cell padding-top="1mm" padding-left="1mm" padding-bottom="0.005mm" padding-right="0.01mm"> -->
+														<fo:table-cell padding="4px 0px">
+															<fo:block>
+																<fo:block space-after="0.040in" space-after.precedence="force"/>
+																<xsl:choose>
+																	<!-- <xsl:when test="./displayAssetSerialNo_l='true'">
+																		<fo:block space-after="0.1in" space-after.precedence="force"/>
+																	</xsl:when> -->
+																</xsl:choose>
+																<fo:block>
+																	<xsl:choose>
+																		<xsl:when test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and    $_dsSub1/displayLine_l='true' and $_dsSub1/_parent_doc_number = ''">
+																			<fo:block linefeed-treatment="preserve" line-height="7pt" text-align="right">
+																				<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																					<xsl:choose>
+																						<!-- this is for model line -->
+																						<xsl:when test="$_dsSub1/model/_model_name !=''">
+																							<xsl:value-of select="$_dsSub1/totalPriceCFD_l"/>
+																						</xsl:when>
+																						<!-- added this is for quick key-->
+																						<!-- <xsl:when test="$_dsSub1/priceOverride_l = 'false'"> -->
+																						<xsl:when test="$_dsSub1/noPriceAvailable_l = 'false' and $_dsSub1/priceOverride_l = 'false'">
+																							<xsl:value-of select="$_dsSub1/listPriceCFD_l"/>
+																						</xsl:when>
+																						<!-- for getting the over ride values when the list price is zero this is also quick key -->
+																						<!-- <xsl:otherwise>
+																							<xsl:value-of select="$_dsSub1/newListPriceCFD_l"/>
+																						</xsl:otherwise> -->
+																						<xsl:when test="$_dsSub1/priceOverride_l = 'true' or $_dsSub1/noPriceAvailable_l = 'true'">
+																							<xsl:value-of select="$_dsSub1/newListPriceCFD_l"/>
+																						</xsl:when>
+																					</xsl:choose>
+																				</fo:inline>
+																			</fo:block>
+																		</xsl:when>
+																	</xsl:choose>
+																</fo:block>
+																<!-- <fo:block space-after="0.1in" space-after.precedence="force"/> -->
+															</fo:block>
+														</fo:table-cell>
+													</xsl:when>
+												</xsl:choose>
+												<xsl:choose>
+													<xsl:when test="$ServiceAdjustmentCondition='true'">
+														<fo:table-cell padding-top="1mm" padding-left="2mm" padding-bottom="0.005mm" padding-right="0.005mm">
+															<fo:block>
+																<fo:block space-after="0.040in" space-after.precedence="force"/>
+																<xsl:choose>
+																	<!-- <xsl:when test="./displayAssetSerialNo_l='true'">
+																		<fo:block space-after="0.1in" space-after.precedence="force"/>
+																	</xsl:when> -->
+																</xsl:choose>
+																<fo:block>
+																	<!-- for Model Lines -->
+																	<xsl:choose>
+																		<xsl:when test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and   $_dsSub1/displayLine_l='true' and $_dsSub1/_parent_doc_number = '' and $_dsSub1/model/_model_name != ''">
+																			<fo:block linefeed-treatment="preserve" line-height="7pt" text-align="right">
+																				<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																					<xsl:value-of select="$_dsSub1/totalAdjustmentCFD_l"/>
+																				</fo:inline>
+																			</fo:block>
+																		</xsl:when>
+																		<xsl:when test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and   $_dsSub1/displayLine_l='true' and $_dsSub1/_parent_doc_number = '' and $_dsSub1/model/_model_name = ''">
+																			<fo:block linefeed-treatment="preserve" line-height="7pt" text-align="right">
+																				<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																					<xsl:value-of select="$_dsSub1/totalDiscountAmountCFD_l"/>
+																				</fo:inline>
+																			</fo:block>
+																		</xsl:when>
+																	</xsl:choose>
+																</fo:block>
+															</fo:block>
+														</fo:table-cell>
+													</xsl:when>
+												</xsl:choose>
+												<xsl:choose>
+													<xsl:when test="$serviceNetPriceCondition='true'">
+														<fo:table-cell padding-top="1mm" padding-left="1mm" padding-bottom="0.005mm" padding-right="0.005mm">
+															<fo:block>
+																<fo:block space-after="0.040in" space-after.precedence="force"/>
+																<xsl:choose>
+																	<!-- <xsl:when test="./displayAssetSerialNo_l='true'">
+																		<fo:block space-after="0.1in" space-after.precedence="force"/>
+																	</xsl:when> -->
+																</xsl:choose>
+																<xsl:choose>
+																	<!-- For Model  Lines -->
+																	<xsl:when test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber    and $_dsSub1/displayLine_l='true' and $_dsSub1/_parent_doc_number = '' and $_dsSub1/model/_model_name != ''">
+																		<fo:block linefeed-treatment="preserve" line-height="7pt" text-align="right">
+																			<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																				<xsl:value-of select="$_dsSub1/netPriceCFD_l"/>
+																			</fo:inline>
+																		</fo:block>
+																	</xsl:when>
+																	<!-- For Quick Keys -->
+																	<xsl:when test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber    and $_dsSub1/displayLine_l='true' and $_dsSub1/_parent_doc_number = '' and $_dsSub1/model/_model_name = ''">
+																		<fo:block linefeed-treatment="preserve" line-height="7pt" text-align="right">
+																			<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																				<xsl:value-of select="$_dsSub1/serviceNetPriceCFD_l"/>
+																			</fo:inline>
+																		</fo:block>
+																	</xsl:when>
+																</xsl:choose>
+															</fo:block>
+														</fo:table-cell>
+													</xsl:when>
+												</xsl:choose>
+												<xsl:choose>
+													<xsl:when test="$QtyCondition='true'">
+														<fo:table-cell padding="4px 0px">
+															<!-- <fo:table-cell padding-top="1mm" padding-left="1mm" padding-bottom="0.005mm" padding-right="2mm"> -->
+															<fo:block>
+																<fo:block space-after="0.01in" space-after.precedence="force"/>
+																<!-- <xsl:if test="./displayAssetSerialNo_l='true'">
+																	<fo:block space-after="0.1in" space-after.precedence="force"/>
+																</xsl:if> -->
+																<xsl:choose>
+																	<!-- // For America and Japn, qty should print only for Model and quick entry items   -->
+																	<!-- // For other regions, qty gets printed for all lines -->
+																	<xsl:when test="($main_doc/cFDRegion_t != 'Region - America' and $main_doc/cFDRegion_t !='Japan')) ">
+																		<fo:block linefeed-treatment="treat-as-space" margin-top="0mm" margin-bottom="0mm" margin-left="0mm" margin-right="0mm">
+																			<xsl:choose>
+																				<!-- <xsl:when test="./displayAssetSerialNo_l='true'">
+																					<fo:block space-after="0.075in" space-after.precedence="force"/>
+																				</xsl:when> -->
+																			</xsl:choose>
+																			<fo:block linefeed-treatment="treat-as-space" text-align="right">
+																				<fo:inline color="rgb(0, 0, 0)" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt">
+																					<xsl:value-of select="$_dsSub1/qtyCFD_l"/>
+																					 </fo:inline>
+																			</fo:block>
+																		</fo:block>
+																	</xsl:when>
+																	<xsl:otherwise>
+																		<fo:block space-after="0.01in" space-after.precedence="force"/>
+																		<xsl:if test="($_dsSub1/_parent_doc_number = '' ) ">
+																			<!-- <fo:block linefeed-treatment="treat-as-space" margin-top="0mm" margin-bottom="0mm" margin-left="0mm" margin-right="0mm"> -->
+																			<!-- for quick items -->
+																			<fo:block linefeed-treatment="treat-as-space" line-height="7pt" text-align="right">
+																				<fo:inline color="rgb(0, 0, 0)" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt">
+																					<xsl:choose>
+																						<xsl:when test="string(number($_dsSub1/qtyCFD_l))='NaN' or not(contains($_dsSub1/qtyCFD_l, '.') or contains($_dsSub1/qtyCFD_l, ','))">
+																							<xsl:value-of select="$_dsSub1/qtyCFD_l"/>
+																						</xsl:when>
+																						<xsl:otherwise>
+																							<xsl:call-template name="BMI_formatFloat">
+																								<xsl:with-param name="val" select="$_dsSub1/qtyCFD_l"/>
+																								<xsl:with-param name="numFormat" select="$EMAIL_RECIPIENT_NUMFORMAT_PREF"/>
+																								<xsl:with-param name="precision">
+																									<xsl:choose>
+																										<xsl:when test="$_dsSub1/qtyCFD_l/@display_precision">
+																											<xsl:value-of select="$_dsSub1/qtyCFD_l/@display_precision"/>
+																										</xsl:when>
+																										<xsl:otherwise>2</xsl:otherwise>
+																									</xsl:choose>
+																								</xsl:with-param>
+																							</xsl:call-template>
+																						</xsl:otherwise>
+																					</xsl:choose> 
+																				</fo:inline>
+																			</fo:block>
+																			<!-- </fo:block> -->
+																		</xsl:if>
+																	</xsl:otherwise>
+																</xsl:choose>
+															</fo:block>
+														</fo:table-cell>
+													</xsl:when>
+												</xsl:choose>
+												<xsl:choose>
+													<xsl:when test="$TotalPriceCondition='true'">
+														<fo:table-cell padding-top="1mm" padding-left="2mm" padding-bottom="0.005mm" padding-right="1mm">
+															<fo:block>
+																<fo:block space-after="0.040in" space-after.precedence="force"/>
+																<xsl:choose>
+																	<!-- <xsl:when test="./displayAssetSerialNo_l='true'">
+																		<fo:block space-after="0.1in" space-after.precedence="force"/>
+																	</xsl:when> -->
+																</xsl:choose>
+																<fo:block>
+																	<xsl:choose>
+																		<xsl:when test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and   $_dsSub1/displayLine_l='true' and $_dsSub1/_parent_doc_number = ''">
+																			<fo:block linefeed-treatment="preserve" line-height="7pt" text-align="right">
+																				<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																					<xsl:value-of select="$_dsSub1/totalPriceCFD_l"/>
+																				</fo:inline>
+																			</fo:block>
+																		</xsl:when>
+																	</xsl:choose>
+																</fo:block>
+															</fo:block>
+														</fo:table-cell>
+													</xsl:when>
+												</xsl:choose>
+												<xsl:choose>
+													<xsl:when test="$TotalAdjustmentCondition='true'">
+														<fo:table-cell padding-top="1mm" padding-left="2mm" padding-bottom="0.005mm" padding-right="1mm">
+															<fo:block>
+																<fo:block space-after="0.040in" space-after.precedence="force"/>
+																<xsl:choose>
+																	<!-- <xsl:when test="./displayAssetSerialNo_l='true'">
+																		<fo:block space-after="0.1in" space-after.precedence="force"/>
+																	</xsl:when> -->
+																</xsl:choose>
+																<fo:block>
+																	<xsl:choose>
+																		<xsl:when test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and $_dsSub1/displayLine_l='true' and $_dsSub1/_parent_doc_number = ''">
+																			<fo:block linefeed-treatment="preserve" line-height="7pt" text-align="right">
+																				<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																					<xsl:value-of select="$_dsSub1/totalAdjustmentCFD_l"/>
+																				</fo:inline>
+																			</fo:block>
+																			<!-- 	</fo:block-container> -->
+																		</xsl:when>
+																	</xsl:choose>
+																</fo:block>
+															</fo:block>
+														</fo:table-cell>
+													</xsl:when>
+												</xsl:choose>
+												<!-- <fo:table-cell  padding-right="1.5mm" padding-top="1mm" padding-left="2mm" padding-bottom="0.005mm"> -->
+												<!-- <fo:table-cell number-columns-spanned="8" padding-top="0.05mm" padding-bottom="1mm" padding-right="3mm"> Latha commented need to chk later	 -->
+												<fo:table-cell number-columns-spanned="8" padding-top="1mm" padding-left="2mm" padding-bottom="0.005mm" padding-right="2.5mm" text-align="right">
+													<fo:block>
+														<fo:block space-after="0.040in" space-after.precedence="force"/>
+														<xsl:choose>
+															<!-- <xsl:when test="./displayAssetSerialNo_l='true'">
+																<fo:block space-after="0.1in" space-after.precedence="force"/>
+															</xsl:when> -->
+														</xsl:choose>
+														<fo:block>
+															<xsl:choose>
+																<xsl:when test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and  not ($_dsSub1/isExtendedWarranty_l='true') and $_dsSub1/displayLine_l='true' and $_dsSub1/_parent_doc_number = ''">
+																	<fo:block linefeed-treatment="preserve" line-height="7pt" text-align="right">
+																		<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																			<xsl:value-of select="$_dsSub1/extendedPriceCFD_l"/>
+																		</fo:inline>
+																	</fo:block>
+																</xsl:when>
+															</xsl:choose>
+														</fo:block>
+														<fo:block>
+															<xsl:choose>
+																<xsl:when test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and $_dsSub1/isExtendedWarranty_l='true' and $_dsSub1/displayLine_l='true'">
+																	<fo:block>
+																		<fo:block linefeed-treatment="preserve" line-height="7pt" text-align="right">
+																			<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																				<xsl:value-of select="$_dsSub1/extendedPriceCFD_l"/>
+																			</fo:inline>
+																		</fo:block>
+																	</fo:block>
+																</xsl:when>
+															</xsl:choose>
+														</fo:block>
+													</fo:block>
+												</fo:table-cell>
+											</fo:table-row>
+											<xsl:if test="$_dsSub1/_parent_doc_number=''">
+												<xsl:choose>
+													<xsl:when test="$_dsSub1/lineComments_l!=''">
+														<fo:table-row keep-together.within-page="1">
+															<fo:table-cell number-columns-spanned="8" padding="4px 0px">
+																<!-- <fo:block-container clip="rect(-3pt,0,-3pt,0)" overflow="hidden"> -->
+																<fo:block linefeed-treatment="preserve" line-height="9pt" text-align="start" font-family="Noto Sans Display Condensed, Albany WT J">
+																	<fo:inline color="#000000" font-size="9pt">
+																		<!-- Displaying Line Comment For Parent and Quick keys -->
+																		<xsl:if test="$main_doc/languageAttr_t !='ja_JP'">
+																			<fo:inline font-weight="bold">
+																				<xsl:value-of select="$notes"/>: </fo:inline>
+																		</xsl:if>
+																		<xsl:if test="$main_doc/languageAttr_t ='ja_JP'">
+																			<fo:inline font-weight="bold">
+																				<xsl:value-of select="$notes"/>
+																			</fo:inline>
+																		</xsl:if>
+																		<!-- <fo:inline font-weight="bold">
+																			<xsl:value-of select="
+																		'Notes: '"/>
+																		</fo:inline -->
+																		<fo:inline>
+																			<xsl:value-of select="$_dsSub1/lineComments_l"/>
+																		</fo:inline>
+																	</fo:inline>
+																</fo:block>
+																<fo:block space-after="0.01in" space-after.precedence="force"/>
+																<!-- </fo:block-container> -->
+															</fo:table-cell>
+														</fo:table-row>
+													</xsl:when>
+												</xsl:choose>
+											</xsl:if>
+											<xsl:if test="$operatingUnit1 = 'BRS-OU-7213'">
+												<fo:table-row keep-together.within-page="1">
+													<fo:table-cell number-columns-spanned="8" padding="4px 0px">
+														<fo:block margin-left="3.8%" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start">
+															<xsl:if test="not(contains(./lineTaxRate_l, '2.040816326'))">
+																<xsl:if test="./brazilICMS_l != '' or ./overrideBrazilICMS_l != ''">
+																	<fo:inline>Alíquotas a incidirem sobre o Preço Lista Total do Item: ICMS </fo:inline>
+																	<xsl:if test="./overrideBrazilICMS_l != ''">
+																		<fo:inline>
+																			<xsl:value-of select="concat(./overrideBrazilICMS_l,'%')"/>
+																		</fo:inline>
+																	</xsl:if>
+																	<xsl:if test="./brazilICMS_l != '' and ./overrideBrazilICMS_l = ''">
+																		<fo:inline>
+																			<xsl:value-of select="concat(./brazilICMS_l,'%')"/>
+																		</fo:inline>
+																	</xsl:if>
+																</xsl:if>
+																<xsl:if test="./brazilIPI_l	 != '' or ./overrideBrazilIPI_l != '' ">
+																	<xsl:if test="./brazilICMS_l = '' and ./overrideBrazilICMS_l = ''">
+																		<fo:inline>Alíquotas a incidirem sobre o Preço Líquido Total do Item: IPI </fo:inline>
+																	</xsl:if>
+																	<xsl:if test="./brazilICMS_l != '' or ./overrideBrazilICMS_l != ''">
+																		<fo:inline> // IPI </fo:inline>
+																	</xsl:if>
+																	<xsl:if test="./overrideBrazilIPI_l != ''">
+																		<fo:inline>
+																			<xsl:value-of select="concat(./overrideBrazilIPI_l,'%')"/>
+																		</fo:inline>
+																	</xsl:if>
+																	<xsl:if test="./brazilIPI_l != '' and ./overrideBrazilIPI_l = ''">
+																		<fo:inline>
+																			<xsl:value-of select="concat(./brazilIPI_l,'%')"/>
+																		</fo:inline>
+																	</xsl:if>
+																</xsl:if>
+																<xsl:if test="(./brazilDIFAL_l != '' or ./overrideDIFAL_l != '') and $brazilTaxExempt = 'exempt'">
+																	<xsl:if test="./brazilIPI_l = '' and ./overrideBrazilIPI_l = '' and ./brazilICMS_l = '' and ./overrideBrazilICMS_l = ''">
+																		<fo:inline>Alíquotas a incidirem sobre o Preço Líquido Total do Item: ICMS ALÍQ. INTERNA </fo:inline>
+																	</xsl:if>
+																	<xsl:if test="./brazilIPI_l != '' or ./overrideBrazilIPI_l != ''">
+																		<fo:inline> // ICMS ALÍQ. INTERNA </fo:inline>
+																	</xsl:if>
+																	<xsl:if test="./overrideDIFAL_l != ''">
+																		<fo:inline>
+																			<xsl:value-of select="concat(./overrideDIFAL_l,'%')"/>
+																		</fo:inline>
+																	</xsl:if>
+																	<xsl:if test="./brazilDIFAL_l != '' and ./overrideDIFAL_l = ''">
+																		<fo:inline>
+																			<xsl:value-of select="concat(./brazilDIFAL_l,'%')"/>
+																		</fo:inline>
+																	</xsl:if>
+																</xsl:if>
+															</xsl:if>
+															<xsl:if test="contains(./lineTaxRate_l, '2.040816326')">
+																<fo:inline>Alíquotas a incidirem sobre o Preço Líquido Total do Item: ISSQN 2%</fo:inline>
+															</xsl:if>
+														</fo:block>
+														<xsl:if test="$_dsSub1/model/_model_name = '' and $_dsSub1/lineTaxRate_l != '0.0'">
+															<fo:block margin-left="3.8%" font-family="Noto Sans Display Condensed, Albany WT J" font-size="9pt" text-align="start">
+																<xsl:value-of select="concat('Fator multiplicador:',' ',./lineTaxRate_l,'%')"/>
+															</fo:block>
+														</xsl:if>
+													</fo:table-cell>
+												</fo:table-row>
+											</xsl:if>
+										</xsl:if>
+									</xsl:for-each>
+									<xsl:if test="$_dsSub1/displayCFDSequenceNumber_l = $modelDocNumber and $_dsSub1/displayLine_l='true' and $_dsSub1/showItemNetTotal_l='true'">
+										<fo:table-row>
+											<fo:table-cell number-columns-spanned="8">
+												<fo:table>
+													<fo:table-column column-width="85.0%"/>
+													<fo:table-column column-width="15.0%"/>
+													<fo:table-body>
+														<fo:table-row>
+															<fo:table-cell>
+																<fo:block linefeed-treatment="preserve" line-height="9pt" text-align="right">
+																	<fo:inline color="#000000" font-size="9pt" font-weight="bold" font-family="Noto Sans Display Condensed, Albany WT J">
+																		<fo:inline text-align="right">
+																			<xsl:value-of select="$serviceItemNetTotal"/> :</fo:inline>
+																	</fo:inline>
+																</fo:block>
+															</fo:table-cell>
+															<fo:table-cell padding-top="0.05mm" padding-bottom="1mm" padding-right="2.2mm">
+																<fo:block linefeed-treatment="preserve" line-height="9pt" text-align="right">
+																	<xsl:if test="$main_doc/languageAttr_t ='ja_JP'">
+																		<fo:inline color="#000000" font-size="9pt" font-family="Noto Sans Display Condensed, Albany WT J">
+																			<fo:inline text-align="right">
+																				<xsl:value-of select="$_dsSub1/itemNetTotalCFD_l"/>
+																			</fo:inline>
+																		</fo:inline>
+																	</xsl:if>
+																	<xsl:if test="$main_doc/languageAttr_t !='ja_JP'">
+																		<fo:inline color="#000000" font-size="9pt" font-weight="bold" font-family="Noto Sans Display Condensed, Albany WT J">
+																			<fo:inline text-align="right">
+																				<xsl:value-of select="$_dsSub1/itemNetTotalCFD_l"/>
+																			</fo:inline>
+																		</fo:inline>
+																	</xsl:if>
+																</fo:block>
+															</fo:table-cell>
+														</fo:table-row>
+													</fo:table-body>
+												</fo:table>
+											</fo:table-cell>
+										</fo:table-row>
+									</xsl:if>
+								</fo:table-body>
+							</fo:table>
+						</fo:table-cell>
+					</fo:table-row>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
+	</fo:table-body>
+</fo:table>

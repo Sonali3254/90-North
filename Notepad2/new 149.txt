@@ -1,0 +1,17 @@
+Building Parameter - B Area Location - Hide Axes text box, array controller  - Done
+Constrain FROM GL and TO  - to enter only numbers
+	
+PEB Estimation tab(Commerce) - Remove axes width, axes length text fields, move all the logic from this fields to free text field - Done
+
+Roof Monitor - 
+			 - create new field - Width,Throat Opening,Heavy Wind,Full Length, Bird Screen.
+			- Create new tab - Cladding
+				Post(LOV) -
+				Create 4 booelan field - Roof Description
+											Single SKin, SAndwich
+										 Wall Description
+										 Single SKin, SAndwich
+
+Roof Walkways - Add Building Number in LIG
+			  - Axes Length, Axes Width  - chage the attribute to text area. - Done - We dont have text area in configuration
+

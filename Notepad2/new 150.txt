@@ -1,0 +1,13 @@
+In Frames and Profile - No. of column should be 20.
+
+Enable End wall profile array controller.
+
+.Add a new field "Same as Roof Panel" boolean - Roof Monitor model - Roof Clading/Wall Cladding tab. - Done
+
+Lead - Oppty - quote - Eng dpt
+						QC
+						Prod like this there are 10 more dept.
+					1. Cost - 
+					2. Revenue - after adding margin.
+					submit the quote - then quotation goes to project dept.
+     

@@ -1,0 +1,6 @@
+zm_wH	
+Tag Number - hiding rule is there in dev but not in prod
+Quantity - hiding rule is there in dev but not in prod
+Model decoding - hiding rule is there in dev but not in prod
+Transportation Charge - hiding rule is there in dev but not in prod
+Total Amount - hiding rule is there in dev but not in prod

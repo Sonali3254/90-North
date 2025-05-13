@@ -1,0 +1,28 @@
+RAL code should come in the description
+
+TCSQ-PIR-40;OUTER S-Z180-ZSP-0.50-AB;INNER Q-AZ150-ZSP-0.50-RB
+
+
+
+Open a new field for None - 
+
+if single skin is enable hide sandwitch button and fields  and vice versa for panel and linear in roofs and panel
+
+Cr2eate a new LOV field - "Warrenty Required"
+				1. - Standard
+				2. - Special
+					2.1 - If it is special - create a new fields  - "Number of Year" - text field
+					
+On quote header - Ceate 2 field LOV  - make these fields mandatory
+			1."Design Warrenty" 
+				1. - Standard -"Number of Year" -  Default it to 10 yrs
+				2. - Special
+					2.1 - If it is special - create a new fields  - "Number of Year" - text field
+					
+			2. "Material Warrenty"
+			 	1. - Standard -"Number of Year" -  Default it to 1 yrs
+				2. - Special
+					2.1 - If it is special - create a new fields  - "Number of Year" - text field
+					
+					2.1 - If it is special - create a new fields  - "Number of Year" - text field
+					

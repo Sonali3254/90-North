@@ -1,0 +1,18 @@
+The QIF is filled by sales.
+then QIF is sends to engineering team.
+then Engineering team will schedule using the Engineering Scheduling System.
+
+Once Scheduled - then it will be assigned to concerned Engineer he will design using the internal design system. They develop the estimates using PES system.
+Engineering team will give the schedule to sales for release of estimate date.
+The sales will handle the quation using excell sheet.
+Haiving the estimate from engineering after it is scheduled to sales then there is a standard proposal contract in word format.
+
+Customer data, infromation from QIF,PES CIF will be there in Porposal contract.
+Proposal contract is submitted to customer.
+After signed from customer then it will go to OM.
+
+QIF---
+
+First step in QIF is account- they will start with creating a account
+ 
+

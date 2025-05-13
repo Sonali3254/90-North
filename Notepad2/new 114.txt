@@ -1,0 +1,10 @@
+Project trab should be visible when Quote staus = Approved.
+
+Create Project Header Status - SUcess then only show "Create Task and Budget" action and freeze all the fields.
+and Project number <> ""
+	-->Hide "Create Project" action
+	
+	
+Create Project Header Status - Success then Freeze all the fields in Project tab and hide create project action. - will check later
+
+Create new step  - Project created - when Project head status and task and budget status Success then status should be changed from approved to Project Created.

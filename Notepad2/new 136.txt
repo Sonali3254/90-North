@@ -1,0 +1,15 @@
+Order amount should be read only
+
+currency and reference amount shoount be there
+
+reciept date and accountting date sould come after bankaccount number
+
+second column 
+
+
+Retention Amount (%)	7%	 
+Retention Amount	1587.6	 
+Retention Tax Amount	238.14	 
+Retention Total Amount	1,825.74	 
+Retention Invoice No.	19000	Read Only
+Retention Invpice Status	 	Read Only

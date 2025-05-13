@@ -1,0 +1,24 @@
+Customer Details - Remove from Layout
+
+ Stopped By ELCA - SHould be only show in inprogress to all the profiles.
+
+Submit - should only show in inprogress
+
+Cancel Approval - should only show in waiting for approval,approved
+
+
+
+Oppertunity Details -create a new tab after customer details and move the attr
+
+UI fields  - left aligned
+
+subscription integration status - remove from layout
+
+Calculation Information - move to troublshoot
+
+discount type, discount - should be editable - make in UI - should be editable in start and inprogress
+
+
+Refresh Button needs to added  - ALL THE STEPS
+
+Create Subscription - Remove from layout - check with sanket and Harshad

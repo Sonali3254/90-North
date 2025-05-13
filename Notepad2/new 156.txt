@@ -1,0 +1,21 @@
+ret = "Gable ";
+ret1 = "(1 @"
+retArr = String[];
+GableArr = range(sizeofarray(gableQty));
+for each in GableArr {
+retArr[each] = ret+ string(each + 1) + (ret1 + width)+ ")";
+}
+return retArr;
+
+
+
+Gable  (1 @20)
+
+Creare a  new Array field  - Gable- add it in gable arrayset. set the gable to return to - Gable1  (1 @20)
+
+Create a new array field in Bayspacing and return type - "1@" +Width
+
+Number of profile shoud be as number of bays.
+Replsce Profile Id array fields to be as a manu field. Default 20 profiles
+Open the number of profile records as same as the bay spacing controller.
+profile Id should show menu as per the bays.

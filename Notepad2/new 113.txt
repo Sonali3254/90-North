@@ -1,0 +1,62 @@
+results = "";
+dli = "~";
+dlf = "|^|";
+coststring = "";
+commentstring = "";
+DiscWeight = string[];
+Qtystring = string[];
+DiscEstimated = string[];
+UnDiscEstimated = string[];
+TotalExWPrice = string[];
+partsArray = range(sizeofarray(componentsBreakDown_peb));
+
+for part in partsArray {
+	if(totalWeightKG_cbdown_peb[part] <> 0) {
+	Qtystring[part] = Qtystring[part] + "@@@" + string(totalWeightKG_cbdown_peb[part]);
+	//print Qtystring[part];
+	if(startswith(Qtystring[part],"null")){
+		Qtystring[part] = substring(Qtystring[part],7);
+		//print Qtystring[part];
+		}
+	}
+	if(discoubtableWeightKG_peb[part] <> 0) {
+	DiscWeight[part] = DiscWeight[part] + "@@@" + string(discoubtableWeightKG_peb[part]);
+		if(startswith(DiscWeight[part],"null")){
+		DiscWeight[part] = substring(DiscWeight[part],7);
+		//print DiscWeight[part];
+		}
+	}
+		if(discoubtableEstimatedPrice_cbdown_peb[part] <> "") {
+	DiscEstimated[part] = DiscEstimated[part] + "@@@" + discoubtableEstimatedPrice_cbdown_peb[part];
+		if(startswith(DiscEstimated[part],"null")){
+		DiscEstimated[part] = substring(DiscEstimated[part],7);
+		//print DiscEstimated[part];
+		}
+	}
+	if(unDiscountableEstimatedPrice_peb[part] <> "") {
+	UnDiscEstimated[part] = UnDiscEstimated[part] + "@@@" + unDiscountableEstimatedPrice_peb[part];
+		if(startswith(UnDiscEstimated[part],"null")){
+		UnDiscEstimated[part] = substring(UnDiscEstimated[part],7);
+		print UnDiscEstimated[part];
+		}
+	}
+	if(totalExworksPrice_peb[part] <> "") {
+	TotalExWPrice[part] = TotalExWPrice[part] + "@@@" + totalExworksPrice_peb[part];
+		if(startswith(TotalExWPrice[part],"null")){
+		TotalExWPrice[part] = substring(TotalExWPrice[part],7);
+		print TotalExWPrice[part];
+		}
+	}
+	coststring = Qtystring[part] + "###" + DiscWeight[part] + "###" + DiscEstimated[part] + "###" + UnDiscEstimated[part] + + "###" + TotalExWPrice[part];
+	if(coststring <> ""){
+	commentstring = commentstring + "^N^" + coststring;
+	if(startswith(commentstring,"^N^")){
+		commentstring = substring(commentstring,len("^N^"));
+		}
+	print commentstring;
+	}
+	
+
+	results = results + materialSpecification[part] + dli + string(quantity[part]) + dli + commentstring + dli + string(labourPrice[part]) + dli + size[part] + dlf;
+}
+return results;

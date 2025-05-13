@@ -1,0 +1,19 @@
+RoofWalkways -  from GL , To Gl - add lov - 1-200
+Gable - 30
+Building number - 200
+bays - 200
+
+AddBuilding number LOV - in all the PEB models and PEB subsytems models
+
+Bring Building Number from Model Config to respective LIG - Applicable for all the models
+
+
+sivasankarganesh.chandrasekaran@mastek.com
+sivasankarganesh.chandrasekaran@mastek.com
+623418215
+
+sivasankarganesh.chandrasekaran@mastek.com
+sivasankarganesh.chandrasekaran@mastek.com
+sivasankarganesh.chandrasekaran@mastek.com
+LEAVE_UNCHANGED
+

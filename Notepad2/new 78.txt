@@ -1,0 +1,6 @@
+*Adv Invoice Attachment
+*Receipt Attachment
+
+These fields should only show only for advance only and both case - Need confirmation from Satish
+
+We need to hide Create Order for (Retaintion only and retaintion percentage is null) - Need confirmation from Satish

@@ -1,0 +1,2 @@
+Inner Panel - should be only visible when  Type of Temcon = TCSO and default the value "FRL" 
+Create One more inner panel field which is visible for the rest of Temcon.

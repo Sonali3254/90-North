@@ -1,0 +1,40 @@
+retStr = "";
+
+if(zm_Steel_pannel_Singleskin_colorName == "FW-Frost White-NCS-S2005-G70Y"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#FBFAF3;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "AB-Arabian Beige-NCS-S3020-Y30R"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#E7CFB6;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "CG-Cactus Green--NCS-S3020-G40Y"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#5C755E;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "RB-Royal Blue-RAL-5012"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#4169e1;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "FR-Flame Red-RAL-3000"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#832729;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "LG-Leaf Green-RAL-6002"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#3A5F0B;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "DY-Daisy Yellow-RAL-1021"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#FAEAB7;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "SB-Shasta Blue-NCS-S5020-B10G"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#345c75;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "SM-Silver Mettalic-RAL-9006"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#C0C0C0;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "GBM-Gray Blue Mettalic"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:Tomato;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "GB-Galaxy Blue-RAL-5009"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:#394361;'></div>";
+}
+if(zm_Steel_pannel_Singleskin_colorName == "TBE"){
+	retStr = retStr + "<div style = 'width: 200px; height: 40px; background-color:White;'></div>";
+}
+
+return retStr;

@@ -1,0 +1,19 @@
+PO Required - Boolean
+
+PO Number - text
+
+If Po Required  - yes, then the PO Number should show.
+
+WHen PO Required is true then Validate PO Number - Should not be empty
+
+Troubleshoot tab shoukd only be visible to admin - hide in steps
+
+Oppertunity tab - all the Oppertunity related fields will be read only for all the profiles in all the steps.(check in mapping file for oppertunity fields remove from the layout which are not there in the mapping file)
+
+ Offer Portal Collaboration , offer Timelines - Remove from Layout.
+ 
+ Pricing Details - all the attributes will be read only in the steps for all the profiles
+ Price score -  Remove from layout
+ 
+ 1.All the Prepared for attributes will be R/O except admin in all the steps.
+2. All the Bill to/ Shipto attributes will be R/O in all the steps except in progress(here R/W for all the profiles)

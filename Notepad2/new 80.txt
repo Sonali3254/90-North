@@ -1,0 +1,5 @@
+Advance (%) - PaymentSetId
+Total Advance Amount - Receipt Number
+
+Retention (%) - Advance Invoice Number
+Retention Total Amount - Advance Amount

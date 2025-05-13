@@ -1,0 +1,34 @@
+1. Clean save API after file uploading -- 
+https://zamilindustrialtest1.bigmachines.com//rest/v16/commerceDocumentsOraclecpqoTransaction/202221931/actions/cleanSave_t
+
+2. 3 excel sheet for all the attr
+3. All the total config attributes should be autop calculated
+4. create two more file attachment attributes
+5.Need to check can we upload 3 attachment file in a single API call 
+
+
+
+Bldg. No.,Width (m),Len. (m),E. H. (m),Roof Slope,
+Roof Area (m�),Area No,Snow(KN /m�),Frame Type,Live Load(KN/m�),
+Collateral(KN/m2),Wind Speed(km/H),No of Main Frames,No of Post & Beam,Total Weight (Kg),
+Factory,Weight (Kg/m�),Currency,Discount %,Primary (m�),
+Total Book Price,Secondary (m�),Book Price per m�,Book Price per ton,Destination,
+Discounted Price,Shipping Method,Discounted Price per M2,Discounted Price per ton,Truck price(Each),
+"Price Book,"
+10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220,230,240,250,260,270,280,290,300,310
+
+
+Category(Kg/LM),Built up(M.Tons),Built up(Man-Hrs/ MT),Built up(Man-HRS),Crane Beam(M.Tons),"Hot Rolled(M.Tons),"
+10,20,30,40,50,"60,"
+70,80,90,100,110,"120,"
+
+
+Components Break Down,Discoubtable(Weight -KG),Un-Discountable(Weight -KG),Total(Weight-KG),Weight (KG) %,Discoubtable(Estimated Price),Un-Discountable(Estimated Price),Total(Ex-works Price),"% (Ex-works Price),
+"Frames,20,30,40,50,60,70,80,"90,
+"Frames,110,120,130,140,150,160,170,"180,"
+
+
+Components Break Down,Discoubtable(Weight -KG),Un-Discountable(Weight -KG),Total(Weight-KG),Weight (KG) %,Discoubtable(Estimated Price),Un-Discountable(Estimated Price),Total(Ex-works Price),"% (Ex-works Price),"
+Frames,20,30,40,50,60,70,80,"90,"
+Frames,110,120,130,140,150,160,170,"180,"
+

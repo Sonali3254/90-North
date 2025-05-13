@@ -1,0 +1,48 @@
+retNo  = 0;
+
+if(isnumber(toGL) AND isnumber(fromGL)){
+retNo = (atoi(toGL) - atoi(fromGL)) + 1;}
+tempArr = range(retNo );
+retArr = String[];
+from = atoi(fromGL);
+for each in tempArr{
+retArr[each] = string(from);
+from = from + 1;
+print retArr[each];
+}
+return retArr ;
+
+retNo  = 0;
+toGldata = "";
+fromGldata = "";
+retArr = String[];
+if(isnumber(toGL) AND isnumber(fromGL)){
+retNo = (atoi(toGL) - atoi(fromGL)) + 1;
+tempArr = range(retNo );
+from = atoi(fromGL);
+for each in tempArr{
+retArr[each] = string(from);
+from = from + 1;
+print retArr[each];
+}}
+else{
+toGlRecord = bmql("select value from Axes where key=$toGL");
+fromGlRecord = bmql("select value from Axes where key=$fromGL");
+for each in toGlRecord {
+toGldata = get(each,"value");
+}
+for each in fromGlRecord {
+fromGldata= get(each,"value");
+}
+retNo = (atoi(toGldata ) - atoi(fromGldata)) + 1;
+tempArr = range(retNo );
+retArr = String[];
+from = atoi(fromGL);
+for each in tempArr{
+retArr[each] = string(from);
+from = from + 1;
+print retArr[each];
+}
+
+}
+return retArr ;
