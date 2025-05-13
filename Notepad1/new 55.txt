@@ -1,0 +1,3 @@
+For multi site- how do we pick a parameter based on a site no
+
+"//ns2:Value/ns2:PartySite[ns1:PartySiteNumber=830054]";

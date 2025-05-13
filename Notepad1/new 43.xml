@@ -1,0 +1,38 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/types/" xmlns:cus="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/" xmlns:cus1="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileDff/" xmlns:cus2="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileGdf/">
+<soapenv:Header> </soapenv:Header>
+<soapenv:Body>
+<typ:getActiveCustomerProfile>
+<typ:customerProfile>
+<!-- Optional: -->
+<cus:CustomerAccountId>{{customerId}}</cus:CustomerAccountId>
+<cus:ProfileClassName>{{profileClass}}</cus:ProfileClassName>
+</typ:customerProfile>
+</typ:getActiveCustomerProfile>
+</soapenv:Body>
+</soapenv:Envelope>
+
+
+<soapenv:Envelope xmlns:cus="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/" xmlns:cus1="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileDff/" xmlns:cus2="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileGdf/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/types/">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsu:Timestamp wsu:Id="TS-9E6FC4C19A92FEF96D16672298924288">
+            <wsu:Created>2022-10-31T15:24:52.428Z</wsu:Created>
+         </wsu:Timestamp>
+         <wsse:UsernameToken wsu:Id="UsernameToken-9E6FC4C19A92FEF96D16672298846137">
+            <wsse:Username>yehya@mact.com.sa</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Welcome@12345</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">0JMaIZhN7sdmq+U+K0VOLg==</wsse:Nonce>
+            <wsu:Created>2022-10-31T15:24:44.613Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <typ:getActiveCustomerProfile>
+         <typ:customerProfile>
+            
+            <cus:AccountNumber>02906</cus:AccountNumber>
+            <cus:ProfileClassName>DEFAULT</cus:ProfileClassName>
+         </typ:customerProfile>
+      </typ:getActiveCustomerProfile>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,6 @@
+https://fa-eloi-test-saasfaprod1.fa.ocs.oraclecloud.com/fscmService/ReceivablesCustomerProfileService
+
+
+https://fa-eloi-saasfaprod1.fa.ocs.oraclecloud.com:443/fscmService/ReceivablesCustomerProfileService
+
+https://fa-eloi-test-saasfaprod1.fa.ocs.oraclecloud.com:443/crmService/FoundationPartiesOrganizationService

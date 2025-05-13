@@ -1,0 +1,9 @@
+
+1-upload file in file manager called : fetchCustomerAccount 
+
+2- create library called : fetch customer account  
+
+3- add file manager path in data table (integration folder) - (INT-SYSTEM-TEMPLATE table) for fetchCustomerAccount
+
+4- define function in fetch customer details btn for calling the library we created 
+

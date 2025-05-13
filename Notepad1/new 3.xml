@@ -1,0 +1,73 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sb1="urn:crmondemand/ws/account/10/2004" xmlns:ns3="http://xmlns.oracle.com/apps/sales/opptyMgmt/opportunities/opportunityService/" xmlns:ns2="http://xmlns.oracle.com/apps/sales/opptyMgmt/opportunities/opportunityService/" version="1.0">
+<xsl:output method="xml"/>
+<xsl:template match="/">
+<data_xml>
+<document document_var_name="transaction">
+<opportunityName_t>
+<xsl:value-of select="//ns3:Name"/>
+</opportunityName_t>
+<_customer_t_last_name>
+<xsl:value-of select="//ns2:PrimaryContactLastName"/>
+</_customer_t_last_name>
+<_customer_t_first_name>
+<xsl:value-of select="//ns2:PrimaryContactFirstName"/>
+</_customer_t_first_name>
+<opportunityNumber_t>
+<xsl:value-of select="//ns2:OptyNumber"/>
+</opportunityNumber_t>
+<oSCPrimaryOrgID_t>
+<xsl:value-of select="//ns2:PrimaryOrganizationId"/>
+</oSCPrimaryOrgID_t>
+<oSCOwnerResourcePartyId_t>
+<xsl:value-of select="//ns2:OwnerResourcePartyId"/>
+</oSCOwnerResourcePartyId_t>
+<currency_t>
+<xsl:value-of select="//ns2:CurrencyCode"/>
+</currency_t>
+<!-- Start of Customization -->
+<oSCSalesStageID>
+<xsl:value-of select="//ns2:SalesStageId"/>
+</oSCSalesStageID>
+<oSCSalesStageName>
+<xsl:value-of select="//ns2:SalesStage"/>
+</oSCSalesStageName>
+<oSCOpportunityOwnerName>
+<xsl:value-of select="//ns2:PartyName1"/>
+</oSCOpportunityOwnerName>
+<oSCOpportunityOwnerEmail>
+<xsl:value-of select="//ns2:EmailAddress"/>
+</oSCOpportunityOwnerEmail>
+<USG_orderType>
+<xsl:value-of select="//ns2:SalesType_c"/>
+</USG_orderType>
+<USG_projectDetails>
+<xsl:value-of select="//ns2:ProjectName_c"/>
+</USG_projectDetails>
+<_customer_id>
+<xsl:value-of select="//ns2:AccountNumberCPQ_c"/>
+</_customer_id>
+<usg_customerAccountNumber>
+<xsl:value-of select="//ns2:AccountNumberCPQ_c"/>
+</usg_customerAccountNumber>
+<oSCCustomerID>
+<xsl:value-of select="//ns2:TargetPartyId"/>
+</oSCCustomerID>
+<oSCOrganizationNumber>
+<xsl:value-of select="//ns2:PartyNumber"/>
+</oSCOrganizationNumber>
+<USG_VAT>
+<xsl:value-of select="//ns2:Vat_c"/>
+</USG_VAT>
+<specialtyCeiling>
+<xsl:value-of select="//ns2:SpecialtyCeiling_c"/>
+</specialtyCeiling>
+<USG_freightCharges>
+<xsl:value-of select="//ns2:FreightCharges_c"/>
+</USG_freightCharges>
+<_customer_t_company_name>
+<xsl:value-of select="//ns2:TargetPartyName"/>
+</_customer_t_company_name>
+</document>
+</data_xml>
+</xsl:template>
+</xsl:stylesheet>

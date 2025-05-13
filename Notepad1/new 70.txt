@@ -1,0 +1,14 @@
+create Invoice - Create Advance Invoice (action) - done
+
+Create Reciept button should only show after the invoice status is success.
+Create & apply reciept should only show after reciept status is success
+tab name - advance/retention - advance - done
+
+*Advance/Retentation
+	Menu - Advance Only
+			Retention Only
+			Both
+			None
+	Hiding Rule - Advance Tab should only show if Menu option is YES.
+	
+	Receipt Amount -- Advance Amount

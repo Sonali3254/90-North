@@ -1,0 +1,5 @@
+Need to check jow ato add customer information to accounts in cpq.
+
+
+
+Transaction number default function can be used for transaction number customization

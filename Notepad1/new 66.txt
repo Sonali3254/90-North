@@ -1,0 +1,11 @@
+throwerror("Please insert customer name or customer account number \n");
+
+
+1 Header  Tab-
+	1. Addition header information
+	2.Customer Information(Billto and hsip To)
+	3.Trnsaction Details -  Quote Type(Menu  - SalesQuote , Sales Agreement)
+							Order Type(Menu)
+	
+	
+	

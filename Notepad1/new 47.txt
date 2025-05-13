@@ -1,0 +1,9 @@
+2 business unit-sccl pvt ltd-- head ofice--dont have any sale--explosive milirtary manufacruring-- need quotation 
+					2 divison- 1.military 2.civil business(cpq needed)
+				AJA- pharmacutiacal manufacturing company- No CPQ- No Quotation
+				1. need sales agreement- asked sales agreement to see how it is currently
+				
+				
+				--we can show the on hand availability stock no need to put warehouse manaher in approval steps 
+				
+				neeed to have a field for requested date to be put-- will check in HLA when they need to put the date for requested date

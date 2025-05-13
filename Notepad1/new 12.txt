@@ -1,0 +1,13 @@
+https://fa-eloi-test-saasfaprod1.fa.ocs.oraclecloud.com:443/crmService/CustomerAccountService
+
+
+
+
+https://fa-eloi-test-saasfaprod1.fa.ocs.oraclecloud.com:443/crmService/FoundationPartiesOrganizationService
+
+
+
+https://fa-eloi-test-saasfaprod1.fa.ocs.oraclecloud.com:443/crmService/FoundationPartiesOrganizationService
+
+Username :  Yehya@mact.com.sa
+Password : Welcome@12345

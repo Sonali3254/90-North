@@ -1,0 +1,46 @@
+<soapenv:Envelope xmlns:cus="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/" xmlns:cus1="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileDff/" xmlns:cus2="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileGdf/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/types/">
+<soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"> <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <wsu:Timestamp wsu:Id="TS-2">
+        <wsu:Created>2022-11-01T06:44:42.799Z</wsu:Created>            
+    </wsu:Timestamp>
+    <wsse:UsernameToken>
+        <wsse:Username>yehya@mact.com.sa</wsse:Username>
+        <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Welcome@12345</wsse:Password>
+    </wsse:UsernameToken>
+</wsse:Security> </soapenv:Header>
+   <soapenv:Body>
+      <typ:getActiveCustomerProfile>
+         <typ:customerProfile>
+            <cus:AccountNumber>GME-50289</cus:AccountNumber>
+            <cus:ProfileClassName>DEFAULT</cus:ProfileClassName>
+         </typ:customerProfile>
+      </typ:getActiveCustomerProfile>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+<soapenv:Envelope xmlns:cus="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/" xmlns:cus1="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileDff/" xmlns:cus2="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileGdf/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/types/">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsu:Timestamp wsu:Id="TS-B124025DC77438CB9316672840892818">
+            <wsu:Created>2022-11-01T06:28:09.280Z</wsu:Created>
+         </wsu:Timestamp>
+         <wsse:UsernameToken wsu:Id="UsernameToken-B124025DC77438CB9316672840842547">
+            <wsse:Username>yehya@mact.com.sa</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">Welcome@12345</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">pxRVWOLrrsPrmvso8QpD1w==</wsse:Nonce>
+            <wsu:Created>2022-11-01T06:28:04.254Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <typ:getActiveCustomerProfile>
+         <typ:customerProfile>
+             <cus:attribute>AccountNumber</typ1:attribute>
+             <cus:operator>=</typ1:operator>
+             <cus:value>GME-50289</typ1:value>
+         </typ:customerProfile>
+      </typ:getActiveCustomerProfile>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,47 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:typ="http://xmlns.oracle.com/apps/cdm/foundation/parties/customerAccountService/applicationModule/types/"
+                  xmlns:typ1="http://xmlns.oracle.com/adf/svc/types/"
+                  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"> {security} </soapenv:Header>
+
+    <soapenv:Body>
+        <typ:findCustomerAccount>
+            <typ:findCriteria>
+                <typ1:fetchStart>0</typ1:fetchStart>
+                <typ1:fetchSize>-1</typ1:fetchSize>
+                <typ1:filter>
+                    <typ1:conjunction/>
+                    <typ1:group>
+                        <typ1:conjunction/>
+                        <typ1:item>
+                            <typ1:conjunction/>
+                            <typ1:upperCaseCompare>false</typ1:upperCaseCompare>
+                            <typ1:attribute>{{Param}}</typ1:attribute>
+                            <typ1:operator>=</typ1:operator>
+                            <typ1:value>{{Value}}</typ1:value>
+                        </typ1:item>
+                    </typ1:group>
+                </typ1:filter>
+                <typ1:excludeAttribute/>
+            </typ:findCriteria>
+            <typ:findControl>
+                <typ1:retrieveAllTranslations>false</typ1:retrieveAllTranslations>
+            </typ:findControl>
+        </typ:findCustomerAccount>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+<soapenv:Envelope xmlns:cus="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/" xmlns:cus1="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileDff/" xmlns:cus2="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileGdf/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/types/">
+<soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"> {security} </soapenv:Header>
+   <soapenv:Body>
+      <typ:getActiveCustomerProfile>
+         <typ:customerProfile>
+            <cus:AccountNumber>{{AccountNo}}</cus:AccountNumber>
+            <cus:ProfileClassName>{{ClassName}}</cus:ProfileClassName>
+         </typ:customerProfile>
+      </typ:getActiveCustomerProfile>
+   </soapenv:Body>
+</soapenv:Envelope>
