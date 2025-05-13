@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:cus="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/" xmlns:cus1="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileDff/" xmlns:cus2="http://xmlns.oracle.com/apps/financials/receivables/customerSetup/customerProfiles/model/flex/CustomerProfileGdf/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:typ="http://xmlns.oracle.com/apps/financials/receivables/customers/customerProfileService/types/">
+<soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"> {security} </soapenv:Header>
+   <soapenv:Body>
+      <typ:getActiveCustomerProfile>
+         <typ:customerProfile>
+            <cus:AccountNumber>{{AccountNo}}</cus:AccountNumber>
+            <cus:ProfileClassName>{{ClassName}}</cus:ProfileClassName>
+         </typ:customerProfile>
+      </typ:getActiveCustomerProfile>
+   </soapenv:Body>
+</soapenv:Envelope>

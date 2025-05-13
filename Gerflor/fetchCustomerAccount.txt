@@ -1,0 +1,31 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:typ="http://xmlns.oracle.com/apps/cdm/foundation/parties/customerAccountService/applicationModule/types/"
+                  xmlns:typ1="http://xmlns.oracle.com/adf/svc/types/">
+<soapenv:Header xmlns:wsa="http://www.w3.org/2005/08/addressing"> {security} </soapenv:Header>
+
+    <soapenv:Body>
+        <typ:findCustomerAccount>
+            <typ:findCriteria>
+                <typ1:fetchStart>0</typ1:fetchStart>
+                <typ1:fetchSize>-1</typ1:fetchSize>
+                <typ1:filter>
+                    <typ1:conjunction/>
+                    <typ1:group>
+                        <typ1:conjunction/>
+                        <typ1:item>
+                            <typ1:conjunction/>
+                            <typ1:upperCaseCompare>false</typ1:upperCaseCompare>
+                            <typ1:attribute>{{Param}}</typ1:attribute>
+                            <typ1:operator>=</typ1:operator>
+                            <typ1:value>{{Value}}</typ1:value>
+                        </typ1:item>
+                    </typ1:group>
+                </typ1:filter>
+                <typ1:excludeAttribute/>
+            </typ:findCriteria>
+            <typ:findControl>
+                <typ1:retrieveAllTranslations>false</typ1:retrieveAllTranslations>
+            </typ:findControl>
+        </typ:findCustomerAccount>
+    </soapenv:Body>
+</soapenv:Envelope>

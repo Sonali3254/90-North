@@ -1,0 +1,44 @@
+msg="";
+retr="";
+if (_transaction_customer_t_company_name ==""){
+  msg = msg + "Please Enter Customer Name\n";
+
+}
+
+if (msg <> "") {
+ throwerror(msg);
+ }
+response=commerce.fetchCustomerAccount(_transaction_customer_t_company_name, usg_customerAccountNumber);
+print response;
+print "+++++++++++++++++++++++++++++++++++++++++++++++";
+xpathsCustomerClassCode = string[1];
+xpathsCustomerClassCode[0] = "//ns2:CustomerClassCode";
+CustomerClassCode= "" ;
+outputCustomerClassCode = readxmlsingle(response, xpathsCustomerClassCode);
+print outputCustomerClassCode;
+        if (containskey(outputCustomerClassCode,xpathsCustomerClassCode[0]))
+        {  CustomerClassCode= get(outputCustomerClassCode,xpathsCustomerClassCode[0]);
+        print CustomerClassCode;
+         }
+         retr=retr+ "1~USG_quotationType1~"+CustomerClassCode+"|";
+print "+++++++++++++++++++++++++++++++++++++++++++++++";
+
+//-------------------------------------------------------------------------------------------------
+organizationSoapRequest=commerce.findOrganization(_transaction_customer_t_company_name);
+//print (_transaction_customer_t_company_name);
+print "+++++++++++++++++++++++++++++++++++++++++++++++";
+xpathsPaymentTerm = string[1];
+xpathsPaymentTerm [0] = "//ns2:Value/ns2:OrganizationProfile/ns2:PaymentTerm_c";
+PaymentTerm = "" ;
+outputPaymentTerm  = readxmlsingle(organizationSoapRequest, xpathsPaymentTerm );
+print outputPaymentTerm ;
+        if (containskey(outputPaymentTerm ,xpathsPaymentTerm [0]))
+        {  PaymentTerm = get(outputPaymentTerm ,xpathsPaymentTerm [0]);
+        print PaymentTerm ;
+         }
+          retr=retr+ "1~USG_paymentTerms1~"+PaymentTerm+"|";
+print "+++++++++++++++++++++++++++++++++++++++++++++++";
+
+print retr;
+
+return "";
