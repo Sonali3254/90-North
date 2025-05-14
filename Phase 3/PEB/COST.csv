@@ -1,0 +1,25 @@
+_start meta data,,,,,
+BusinessUnit,BusinessLine,QuoteNo,QuoteVersion,CBD,TotalCostPrice
+String,String,String,String,String,String
+Business Unit,Business Line,Quote No.,Quote Version,Component Breakdown Category,Total Cost Price
+_end meta data,,,,,
+KSA Zamil Structural Steel,SSD,Q83,1,Built Up,7024089
+KSA Zamil Structural Steel,SSD,Q83,1,Built Up Offline,7024089
+KSA Zamil Structural Steel,SSD,Q83,1,Hot Rolled,13098
+KSA Zamil Structural Steel,SSD,Q83,1,Welded Assembly (Trusses; Laced Columns etc.),67000
+KSA Zamil Structural Steel,SSD,Q83,1,Misc. Steel (Ladder; Stair; Handrail),20000
+KSA Zamil Structural Steel,SSD,Q83,1,Chequered Plate Flooring,21000
+KSA Zamil Structural Steel,SSD,Q83,1,Grating Flooring,18000
+KSA Zamil Structural Steel,SSD,Q83,1,Sundry Parts,78000
+KSA Zamil Structural Steel,SSD,Q83,1,Rods & Cables,90000
+KSA Zamil Structural Steel,SSD,Q83,1,Shot Blasting,54000
+KSA Zamil Structural Steel,SSD,Q83,1,Paint,28999
+KSA Zamil Structural Steel,SSD,Q83,1,Hot Dip Galvanized,990000
+KSA Zamil Structural Steel,SSD,Q83,1,Cold Formed,435789
+KSA Zamil Structural Steel,SSD,Q83,1,Sheeting Panels,458999
+KSA Zamil Structural Steel,SSD,Q83,1,Decking,19000
+KSA Zamil Structural Steel,SSD,Q83,1,Tempcon Panels,80000
+KSA Zamil Structural Steel,SSD,Q83,1,Gutters; Downspouts; Trims; Flashings,10000
+KSA Zamil Structural Steel,SSD,Q83,1,Standard Buyouts,67000
+KSA Zamil Structural Steel,SSD,Q83,1,Special Buyouts,20000
+KSA Zamil Structural Steel,SSD,Q83,1,Special Works (Testing; Engg.; Powder Coating),21000
