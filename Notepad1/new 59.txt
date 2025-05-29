@@ -1,9 +1,0 @@
-Salesforce - CPQ field Mapping details
-- Quote to oppertunity
-Sales Organizational Hierarchy
-Approval hierarchy and conditions
-	List of approvaers and approval flow
-Business Units and Legal entities
-
-Pricing of Products in Salesforce - CPQ in future
-

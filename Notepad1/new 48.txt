@@ -1,7 +1,0 @@
-JBO-27023: Failed to validate all rows in a transaction.JBO-27024: Failed to validate a row with key oracle.jbo.Key[300000714279942 ] in HeaderEOJBO-27024: Failed to validate a row with key oracle.jbo.Key[300000714279943 ] in HeaderEffBQuotation__DataprivateEOJBO-FND:::FND_VS_VAL_NOT_IN_LIST: Segment Type housing is not in the list of values.
-
-
-quote staus-ordermangamenet fullfullied--hide fetch customer details action
-
-
-status-order being fullfilled

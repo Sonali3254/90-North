@@ -1,2 +1,0 @@
-6. for UOM we need to check with inventory team
-10. Service item and stock item configuration screnshot needs to be checked from inventory team- because currently they are not using any template they are just generating the invoice for service item.
