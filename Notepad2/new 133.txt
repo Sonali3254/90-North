@@ -1,4 +1,0 @@
-Created the  - Total Material Price, Total Labour Price
-Added to the respective layout
-Created Price rule
-Created the Rec rule

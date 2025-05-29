@@ -1,2 +1,0 @@
-1. LIG was not reflecting with the correct values that was mapped from Config.
-2. Save action modify before formula was not working as expected.
